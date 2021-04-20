@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-import Form from 'react-bootstrap/Form'
+// import Form from 'react-bootstrap/Form'
 import '../App.css'
 
 class SearchView extends React.Component {
@@ -9,8 +9,17 @@ class SearchView extends React.Component {
     this.state = {
       userID: "",
       success: "",
-      likesData: []
+      likesData: [],
+      editing: false,
     }
+  }
+  renderButtons = (num_skills) => {
+    const views = [];
+    for (var i = 0; i < num_skills; i++) {
+      views.push(<button key={this.state.likesData[i]} style={{backgroundColor: 'lightblue'}}>Find Skills</button>)
+
+    }
+    return views;
   }
 
   changeUserID = (e) => {
@@ -32,7 +41,7 @@ class SearchView extends React.Component {
     .then(response => response.json())
     .then((data) => {
       console.log(data)
-      if (data != "") {
+      if (data !== "") {
           this.setState({success:"t", likesData: data})
       } else {
           this.setState({success:"f"})
@@ -40,6 +49,7 @@ class SearchView extends React.Component {
     })
     
   }
+  
 
   render() {
     return (
@@ -51,13 +61,15 @@ class SearchView extends React.Component {
             onChange={this.changeUserID}
             value = {this.state.userID}
          />
-         <button onClick={this.searchLikes}>Find Skills</button>
+         <button style={{backgroundColor: 'lightblue'}}onClick={this.searchLikes}>Find Skills</button>
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
          {this.state.success ==="t" && 
             <div>
             {/* look into the map function in js*/}
             {/* <h3>UserID: {this.state.likesData[0][0]}</h3> */}
             <h3>Skill(s): {this.state.likesData.join(", ")}</h3>
+            {this.renderButtons(this.state.likesData.length)}
+            <button onClick={this.searchLikes}></button>
             {/* <h3>Like2: {this.state.likesData[0][2]}</h3>
             <h3>Like3: {this.state.likesData[0][3]}</h3>
             <h3>Like4: {this.state.likesData[0][4]}</h3>

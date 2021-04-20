@@ -32,7 +32,7 @@ class AdvancedQuery extends React.Component {
     .then(response => response.json())
     .then((data) => {
       console.log(data)
-      if (data != "") {
+      if (data !== "") {
           this.setState({success:"t", likesData: data})
       } else {
           this.setState({success:"f"})
