@@ -241,9 +241,9 @@ def update():
 
     data = request.get_json()
 
-    update_likes = 'Update Skills Set Skill = %s, Rating = %s where UserID = %s'
+    update_likes = 'Update Skills SET Rating = %s where UserID = %s and Skill = %s'
     cursor = connection.cursor()
-    cursor.execute(update_likes, (data['Skill'], data['Rating'], data['UserID']))
+    cursor.execute(update_likes, (data['Rating'], data['UserID'], data['Skill']))
 
     #result = {'success': True, 'response': 'Done'}
 
