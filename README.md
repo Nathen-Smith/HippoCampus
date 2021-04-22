@@ -8,7 +8,7 @@ HOST=0.0.0.0 npm run start
 ```
 On another terminal:
 ```
-cd backend
+cd Backend
 pip3 install requirements.txt
 python3 server.py
 ```
