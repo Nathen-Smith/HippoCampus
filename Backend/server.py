@@ -213,7 +213,7 @@ def create():
     # UserID = data['UserID']
     cursor = connection.cursor()
     cursor.execute("DROP TRIGGER IF EXISTS skilltrigger")
-    t = "CREATE TRIGGER skilltrigger BEFORE INSERT ON Skills FOR EACH ROW BEGIN IF NEW.Rating > 5 THEN SET NEW.Rating = 5; END IF; END"
+    t = "CREATE TRIGGER skilltrigger BEFORE INSERT ON Skills FOR EACH ROW BEGIN IF NEW.Rating > 5 THEN SET NEW.Rating = 5; END IF; IF NEW.Rating < 1 THEN SET New.Rating = 1; END IF; END"
     cursor.execute(t)
 
     insert_user = 'Insert IGNORE Into User (UserID) VALUES (' + data['UserID'] + ');'
