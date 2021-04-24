@@ -4,7 +4,7 @@ Only need npm install first time:
 ```
 cd ReactApp
 npm install
-HOST=0.0.0.0 npm run start
+npm start
 ```
 On another terminal:
 ```
