@@ -8,6 +8,8 @@ function Logout() {
   const onSuccess = () => {
     console.log('Logout made successfully');
     alert('Logout made successfully ✌');
+    //remove UserID from session storage
+    sessionStorage.clear()
   };
 
   return (

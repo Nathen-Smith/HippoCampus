@@ -12,17 +12,12 @@ import Logout from "./containers/Logout"
 export default function Routes() {
   return (
     <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route exact path="/login"><Login /> 
+      <Route exact path="/"><Home /></Route>
+      <Route exact path="/login"><Login /> </Route>
         {/* <Redirect to="/user" /> */}
-      </Route>
       <Route exact path="/logout"><Logout /></Route>  
       
-      <Route>
-        <NotFound />
-      </Route>
+      <Route><NotFound /> </Route>
     </Switch>
   );
 }
