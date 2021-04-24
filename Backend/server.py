@@ -305,6 +305,28 @@ def advanced():
     
     return jsonify(result)
 
+@app.route("/findUser", methods=['POST'])
+def findUser():
+    """ recieves post requests to add new task """
+
+    # data = request.get_json()
+    connection.reconnect()
+
+    cursor = connection.cursor()
+    data = request.get_json()
+    name = data['name'].split()
+    # test = "SELECT FirstName, LastName, CEIL(avg_rating) FROM (SELECT FirstName, LastName, AVG(Rating) as avg_rating FROM Skills NATURAL JOIN User WHERE Skill = 'coding' OR Skill = 'addition' GROUP BY UserID) as temp ORDER BY CEIL(avg_rating) DESC;"
+    insert_user = 'Insert IGNORE Into User (UserID, FirstName, LastName) VALUES (%s, %s, %s);'
+    hashed_ID = int(data['UserID']) % 2147483647
+    cursor.execute(insert_user, (str(hashed_ID), name[0], name[1]))
+    test = 'select * from User ORDER BY UserID DESC LIMIT 1'
+    cursor.execute(test)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return jsonify([])
+    
+    return jsonify(result)
+
 # @app.route("/")
 # def homepage():
 #     """ returns rendered homepage """
