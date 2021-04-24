@@ -10,6 +10,7 @@ function Logout() {
     alert('Logout made successfully ✌');
     //remove UserID from session storage
     sessionStorage.clear()
+    window.location.reload()
   };
 
   return (
