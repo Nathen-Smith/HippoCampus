@@ -1,6 +1,7 @@
-# Building
+# Building (incomplete)
 
-Only need npm install first time:
+Only need npm install first time: 
+MAY NEED OTHER INSTALLS FOR npm
 ```
 cd ReactApp
 npm install
