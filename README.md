@@ -1,4 +1,5 @@
 # Building
+(Optional) virtualenv: https://cloud.google.com/python/docs/setup#installing_and_using_virtualenv
 
 Only need npm install first time: 
 ```
