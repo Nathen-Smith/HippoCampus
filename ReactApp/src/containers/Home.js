@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-// import SearchView from "../components/SearchView"
+// import SearchView from "../components/SearchView.js"
 import { LinkContainer } from "react-router-bootstrap";
 import Nav from "react-bootstrap/Nav";
 
@@ -17,14 +17,18 @@ export default function Home() {
                     {/* <SearchView></SearchView><br /> */}
                     <LinkContainer to="/edit">
                 <Nav.Link >Edit</Nav.Link>
-                
+
               </LinkContainer>
               <LinkContainer to="/find">
                 <Nav.Link >Find Matches</Nav.Link>
+
+              </LinkContainer>
+
+              <LinkContainer to = "/matches">
+                <Nav.Link>Matches</Nav.Link>
                 
               </LinkContainer>
-        
-        
+
                 </div>
             </div>
         );
@@ -35,8 +39,8 @@ export default function Home() {
                 <div className="lander">
                     <h1>HippoCampus</h1>
                     <p className="text-muted">Professional Tinder</p>
-        
-        
+
+
                 </div>
             </div>
         );

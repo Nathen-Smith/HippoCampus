@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import 'bootstrap/dist/css/bootstrap.css'
+
 // import Form from 'react-bootstrap/Form'
 import './App.css'
 // import Create from './components/Create.js'
@@ -23,7 +24,7 @@ class App extends React.Component {
     if (this.state.name != null) {
       return (
         <div className="App container py-3">
-  
+
         <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
           <LinkContainer to="/">
             <Navbar.Brand className="font-weight-bold text-muted">
@@ -32,7 +33,9 @@ class App extends React.Component {
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle />
+
           <Navbar.Collapse className="justify-content-end">
+            
             <Nav activeKey={window.location.pathname}>
               <LinkContainer to="/login">
                 <Nav.Link >Login</Nav.Link>
@@ -50,8 +53,8 @@ class App extends React.Component {
         <SearchView></SearchView><br />
         <AdvancedQuery></AdvancedQuery><br /> */}
         </div>
-    
-  
+
+
       );
     }
     else {
@@ -84,7 +87,7 @@ class App extends React.Component {
       <SearchView></SearchView><br />
       <AdvancedQuery></AdvancedQuery><br /> */}
       </div>
-  
+
 
     ); }
   }
