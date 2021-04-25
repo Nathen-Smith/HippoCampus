@@ -1,6 +1,8 @@
 import React from "react";
 import "./Home.css";
-import SearchView from "../components/SearchView"
+// import SearchView from "../components/SearchView"
+import { LinkContainer } from "react-router-bootstrap";
+import Nav from "react-bootstrap/Nav";
 
 export default function Home() {
     var UserID = sessionStorage.getItem("UserID")
@@ -12,7 +14,15 @@ export default function Home() {
                     <h1>Welcome, {name}</h1>
                     {/* <h1>HippoCampus</h1> */}
                     {/* <p className="text-muted">Logged in!</p> */}
-                    <SearchView></SearchView><br />
+                    {/* <SearchView></SearchView><br /> */}
+                    <LinkContainer to="/edit">
+                <Nav.Link >Edit</Nav.Link>
+                
+              </LinkContainer>
+              <LinkContainer to="/find">
+                <Nav.Link >Find Matches</Nav.Link>
+                
+              </LinkContainer>
         
         
                 </div>
