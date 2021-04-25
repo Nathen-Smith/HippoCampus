@@ -278,13 +278,17 @@ def delete():
 @app.route("/search", methods=['POST'])
 def search():
     """ recieves post requests to add new task """
-
+    connection.reconnect()
     data = request.get_json()
-
     cursor = connection.cursor()
-    test = 'Select Skill From Skills Where UserID = ' + data["UserID"] + ';'
+    test = 'Select Skill From Skills Where UserID = ' + str(data["UserID"]) + ';'
+    # test = 'Select Skill From Skills Where UserID = ' + data["UserID"] + ';'
+    
     cursor.execute(test)
     result = cursor.fetchall()
+    # ratings = 'Select Ratings From Skills Where UserID = ' + data["UserID"] + ';'
+
+    
     if len(result) == 0:
         return jsonify([])
     
@@ -322,6 +326,34 @@ def findUser():
     test = 'select * from User ORDER BY UserID DESC LIMIT 1'
     cursor.execute(test)
     result = cursor.fetchall()
+    if len(result) == 0:
+        return jsonify([])
+    
+    return jsonify(result)
+
+@app.route("/deleteSkill", methods=['POST'])
+def deleteSkill():
+    """ recieves post requests to add new task """
+    connection.reconnect()
+
+    data = request.get_json()
+
+    test = 'DELETE From Skills Where UserID = %s and Skill = %s;'
+    cursor = connection.cursor()
+
+    cursor.execute(test, (data["UserID"], data["Skill"]))
+    connection.commit()
+
+    # test2 = 'Select Rating From Skills Where UserID = ' + data["UserID"] + ' and Skill = ' + str(data["Skill"]) + ';'
+    test2 = 'SELECT * From Skills Where UserID = %s;'
+
+    cursor.execute(test2, (data["UserID"]))
+
+
+    result = cursor.fetchall()
+    # ratings = 'Select Ratings From Skills Where UserID = ' + data["UserID"] + ';'
+
+    
     if len(result) == 0:
         return jsonify([])
     

@@ -4,6 +4,7 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login"
 import Logout from "./containers/Logout"
+import SearchView from "./components/SearchView"
 // import AuthenticatedRoute from "./components/AuthenticatedRoute";
 // import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 // import { Redirect} from "react-router-dom";
@@ -16,6 +17,10 @@ export default function Routes() {
       <Route exact path="/login"><Login /> </Route>
         {/* <Redirect to="/user" /> */}
       <Route exact path="/logout"><Logout /></Route>  
+      <Route exact path="/edit"><SearchView /></Route>  
+
+      <Route exact path="/"><Logout /></Route>  
+
       
       <Route><NotFound /> </Route>
     </Switch>

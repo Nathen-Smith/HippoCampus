@@ -1,6 +1,5 @@
 import React from "react";
 import "./Home.css";
-// import SearchView from "../components/SearchView"
 import { LinkContainer } from "react-router-bootstrap";
 import Nav from "react-bootstrap/Nav";
 
@@ -15,6 +14,7 @@ export default function Home() {
                     {/* <h1>HippoCampus</h1> */}
                     {/* <p className="text-muted">Logged in!</p> */}
                     {/* <SearchView></SearchView><br /> */}
+                    <Nav activeKey={window.location.pathname}>
                     <LinkContainer to="/edit">
                 <Nav.Link >Edit</Nav.Link>
                 
@@ -23,7 +23,7 @@ export default function Home() {
                 <Nav.Link >Find Matches</Nav.Link>
                 
               </LinkContainer>
-        
+              </Nav>
         
                 </div>
             </div>
