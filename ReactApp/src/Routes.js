@@ -6,6 +6,7 @@ import Login from "./containers/Login"
 import Logout from "./containers/Logout"
 
 import MatchesTab from "./containers/MatchesTab"
+import CardsTab from "./containers/CardsTab"
 
 import Edit from "./containers/Edit"
 
@@ -23,6 +24,7 @@ export default function Routes() {
         {/* <Redirect to="/user" /> */}
       <Route exact path="/logout"><Logout /></Route>
       <Route exact path="/matches"><MatchesTab /></Route>
+      <Route exact path="/find"><CardsTab /></Route>
 
       <Route><NotFound /> </Route>
     </Switch>
