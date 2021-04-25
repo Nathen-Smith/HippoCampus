@@ -47,9 +47,9 @@ class SearchView extends React.Component {
           this.setState({success:"f"})
       }
     })
-    
+
   }
-  
+
 
   render() {
     return (
@@ -63,7 +63,7 @@ class SearchView extends React.Component {
          />
          <button style={{backgroundColor: 'lightblue'}}onClick={this.searchLikes}>Find Skills</button>
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
-         {this.state.success ==="t" && 
+         {this.state.success ==="t" &&
             <div>
             {/* look into the map function in js*/}
             {/* <h3>UserID: {this.state.likesData[0][0]}</h3> */}
@@ -76,7 +76,7 @@ class SearchView extends React.Component {
             <h3>Like5: {this.state.likesData[0][5]}</h3> */}
             </div>
          }
-     
+
       </div>
 
     )
