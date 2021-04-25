@@ -1,0 +1,15 @@
+import { HttpHandlerOptions } from '@aws-sdk/types';
+import { HttpHandler, HttpRequest, HttpResponse } from '@aws-sdk/protocol-http';
+import { CancelTokenSource } from 'axios';
+import { FetchHttpHandlerOptions } from '@aws-sdk/fetch-http-handler';
+export declare const SEND_PROGRESS_EVENT = "sendProgress";
+export declare class AxiosHttpHandler implements HttpHandler {
+    private readonly httpOptions;
+    private readonly emitter?;
+    private readonly cancelTokenSource?;
+    constructor(httpOptions?: FetchHttpHandlerOptions, emitter?: any, cancelTokenSource?: CancelTokenSource);
+    destroy(): void;
+    handle(request: HttpRequest, options: HttpHandlerOptions): Promise<{
+        response: HttpResponse;
+    }>;
+}
