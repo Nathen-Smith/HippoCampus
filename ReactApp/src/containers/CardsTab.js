@@ -34,6 +34,6 @@ export default function makeMatches() {
       <div className="cards_tab text-center">
         {CardInfo.map(renderCard)}
       </div>    
-    );
+    ); 
     
 }

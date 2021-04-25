@@ -23,10 +23,10 @@ export default function Home() {
                 <Nav.Link >Find Matches</Nav.Link>
 
               </LinkContainer>
-              
+
               <LinkContainer to = "/matches">
                 <Nav.Link>Matches</Nav.Link>
-                
+                 
               </LinkContainer>
 
                 </div>
