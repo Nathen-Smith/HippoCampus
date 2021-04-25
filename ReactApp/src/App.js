@@ -11,67 +11,7 @@ import './App.css'
 // import AdvancedQuery from './components/AdvancedQuery.js'
 import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap";
-// Firebase App (the core Firebase SDK) is always required and must be listed first
-// import firebase from "firebase/app";
-// import "firebase/analytics";
-// import "firebase/auth";
-// import "firebase/firestore";
-// Firebase log-in widget
-// function configureFirebaseLoginWidget() {
-//   var uiConfig = {
-//     'signInSuccessUrl': '/',
-//     'signInOptions': [
-//       // Leave the lines as is for the providers you want to offer your users.
-//       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//       // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-//       // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-//       // firebase.auth.GithubAuthProvider.PROVIDER_ID,
-//       firebase.auth.EmailAuthProvider.PROVIDER_ID
-//     ],
-//     // Terms of service url
-//     'tosUrl': '<your-tos-url>',
-//   };
 
-//   var ui = new firebaseui.auth.AuthUI(firebase.auth());
-//   ui.start('#firebaseui-auth-container', uiConfig);
-// }
-// firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     $('#logged-out').hide();
-//     var name = user.displayName;
-
-//     /* If the provider gives a display name, use the name for the
-//     personal welcome message. Otherwise, use the user's email. */
-//     var welcomeName = name ? name : user.email;
-
-//     user.getIdToken().then(function(idToken) {
-//       userIdToken = idToken;
-
-//       /* Now that the user is authenicated, fetch the notes. */
-//       fetchNotes();
-
-//       $('#user').text(welcomeName);
-//       $('#logged-in').show();
-
-//     });
-
-//   } else {
-//     $('#logged-in').hide();
-//     $('#logged-out').show();
-
-//   }
-// });
-// // Fetch notes from the backend.
-// function fetchNotes() {
-//   $.ajax(backendHostUrl + '/notes', {
-//     /* Set header for the XMLHttpRequest to get data from the web server
-//     associated with userIdToken */
-//     headers: {
-//       'Authorization': 'Bearer ' + userIdToken
-//     }
-//   })
-// var auth = firebase.auth();
-// auth.useEmulator("http://localhost:9099");
 class App extends React.Component {
   constructor (props) {
     super(props);
@@ -95,7 +35,7 @@ class App extends React.Component {
           <Navbar.Collapse className="justify-content-end">
             <Nav activeKey={window.location.pathname}>
               <LinkContainer to="/login">
-                <Nav.Link >Change Accounts</Nav.Link>
+                <Nav.Link >Login</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/logout">
                 <Nav.Link>Logout</Nav.Link>
