@@ -37,6 +37,9 @@ function Login() {
           console.log(data)
         })
         sessionStorage.setItem('UserID', res.profileObj.googleId % 2147483647);
+        sessionStorage.setItem('name', res.profileObj.name)
+        // window.location.reload()
+
         //we should use this item UserID to display if it is in session storage
         
       

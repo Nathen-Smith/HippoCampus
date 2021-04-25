@@ -73,15 +73,56 @@ import { LinkContainer } from "react-router-bootstrap";
 // var auth = firebase.auth();
 // auth.useEmulator("http://localhost:9099");
 class App extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state={
+        name:sessionStorage.getItem("name") //how to reset after logout?
+    }
+  }
   render() {
+    if (this.state.name != null) {
+      return (
+        <div className="App container py-3">
+  
+        <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+          <LinkContainer to="/">
+            <Navbar.Brand className="font-weight-bold text-muted">
+            HippoCampus
+            {/* <div>{this.state.name}</div> */}
+            </Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav activeKey={window.location.pathname}>
+              <LinkContainer to="/login">
+                <Nav.Link >Change Accounts</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/logout">
+                <Nav.Link>Logout</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Routes />
+        {/* <Create></Create><br />
+        <Updates></Updates><br />
+        <Delete></Delete><br />
+        <SearchView></SearchView><br />
+        <AdvancedQuery></AdvancedQuery><br /> */}
+        </div>
+    
+  
+      );
+    }
+    else {
     return (
-      
       <div className="App container py-3">
 
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
         <LinkContainer to="/">
           <Navbar.Brand className="font-weight-bold text-muted">
-            HippoCampus
+          HippoCampus
+          {/* <div>{this.state.name}</div> */}
           </Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle />
@@ -105,7 +146,7 @@ class App extends React.Component {
       </div>
   
 
-    );
+    ); }
   }
 }
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
