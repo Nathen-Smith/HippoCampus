@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-import Form from 'react-bootstrap/Form'
+// import Form from 'react-bootstrap/Form'
 import '../App.css'
 
 class Create extends React.Component {
