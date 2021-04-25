@@ -282,7 +282,7 @@ def search():
     data = request.get_json()
 
     cursor = connection.cursor()
-    test = 'Select Skill From Skills Where UserID = ' + data["UserID"] + ';'
+    test = 'Select Skill From Skills Where UserID = ' + str(data["UserID"]) + ';'
     cursor.execute(test)
     result = cursor.fetchall()
     if len(result) == 0:
@@ -326,6 +326,21 @@ def findUser():
         return jsonify([])
     
     return jsonify(result)
+
+@app.route("/deleteSkill", methods=['POST'])
+def deleteSkill():
+    """ recieves post requests to add new task """
+    connection.reconnect()
+
+    data = request.get_json()
+
+    test = 'DELETE From Skills Where UserID = %s and Skill = %s;'
+    cursor = connection.cursor()
+
+    cursor.execute(test, (str(data["UserID"]), data["Skill"]))
+    connection.commit()
+    
+    return jsonify("Success")
 
 # @app.route("/")
 # def homepage():
