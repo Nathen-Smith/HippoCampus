@@ -9,34 +9,23 @@ class SearchView extends React.Component {
     super(props);
     this.state = {
       // userID: sessionStorage.getItem("UserID"),
-      userID: 8,
+      userID: 4,
       success: "",
       likesData: [],
       toRemove: "",
       editing: false
     }
-    // this.renderButtons = this.renderButtons.bind(this);
   }
-  // test = (val) => {
-  //   console.log(val)
-  // }
-  renderButtons = (num_skills, data) => {
-    const views = [];
-    // const data_ = data;
-    for (var i = 0; i < num_skills; i ++) {
-      // views.push(<button>FUCK</button>)
-      // views.push(<button style={{backgroundColor: 'lime'}}>Remove {data[i][0]}</button>)
-      views.push(<button style={{backgroundColor: 'lime'}}onClick={this.removeSkill.bind(null, i)}key={i}>Remove {data[i][0]}</button>)
-      // https://www.codeblocq.com/2015/12/Loops-and-callbacks-in-React/ BIND creates new function with global context
-      // views.push(<button style={{backgroundColor: 'lime'}}onClick={this.removeSkill(data[i])}>Remove {data[i]}</button>)
-      // views.push(<p>Update {data[i][0]}</p>)
-      // views.push(<input
-      //   type="text"
-      // />)
-      views.push(<br />)
-      // onClick={}
 
+  renderButtons = (num_skills, data) => {
+    var views = [], buttons = []
+    for (var i = 0; i < num_skills; i++) {
+      buttons.push({index: i, text: data[i]})
     }
+    buttons.forEach(function(item) {
+      views.push(<li key={item.index}><button onClick={this.removeSkill.bind(null, item.index)}>Remove {item.text}</button></li>
+      );
+    }, this);
     return views;
   }
 
@@ -65,14 +54,7 @@ class SearchView extends React.Component {
     })
     
   }
-  // renderButtons = (data) => {
-  //   const views = [];
-  //   for (var i = 0; i < num_skills; i += 2) {
-  //     views.push(<button key={this.state.likesData[i]} style={{backgroundColor: 'lightblue'}}>Find Skills</button>)
-
-  //   }
-  //   return views;
-  // }
+  
 
   changeUserID = (e) => {
       this.setState({userID: e.target.value})

@@ -345,19 +345,19 @@ def deleteSkill():
     connection.commit()
 
     # test2 = 'Select Rating From Skills Where UserID = ' + data["UserID"] + ' and Skill = ' + str(data["Skill"]) + ';'
-    test2 = 'SELECT * From Skills Where UserID = %s;'
+    # test2 = 'SELECT * From Skills Where UserID = %s;'
+    # cursor = connection.cursor()
+    # cursor.execute(test2, (data["UserID"]))
 
-    cursor.execute(test2, (data["UserID"]))
 
-
-    result = cursor.fetchall()
+    # result = cursor.fetchall()
     # ratings = 'Select Ratings From Skills Where UserID = ' + data["UserID"] + ';'
 
     
-    if len(result) == 0:
-        return jsonify([])
+    # if len(result) == 0:
+    #     return jsonify([])
     
-    return jsonify(result)
+    return jsonify("Success")
 
 # @app.route("/")
 # def homepage():
