@@ -14,6 +14,9 @@ const clientId =
 function Login() {
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
+    sessionStorage.setItem('UserID', res.profileObj.googleId);
+    sessionStorage.setItem('name', res.profileObj.name);
+
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍.`
     );
@@ -36,8 +39,8 @@ function Login() {
         .then((data) => {
           console.log(data)
         })
-        sessionStorage.setItem('UserID', res.profileObj.googleId % 2147483647);
-        sessionStorage.setItem('name', res.profileObj.name)
+        // sessionStorage.setItem('UserID', res.profileObj.googleId % 2147483647);
+        // sessionStorage.setItem('name', res.profileObj.name)
         // window.location.reload()
 
         //we should use this item UserID to display if it is in session storage

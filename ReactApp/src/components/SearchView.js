@@ -45,6 +45,7 @@ class SearchView extends React.Component {
     .then(response => response.json())
     .then((data) => {
       console.log(data)
+      // console.log(this.state.UserID)
       // window.location.reload()
       // if (data !== "") {
       //     this.setState({success:"t"})
