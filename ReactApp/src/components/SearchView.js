@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
 import {Button} from 'react-bootstrap'
+import styles from './SearchView.module.css';
 // import { Link } from 'react-router-dom'
 
 class SearchView extends React.Component {
@@ -24,7 +25,19 @@ class SearchView extends React.Component {
       buttons.push({index: i, text: data[i]})
     }
     buttons.forEach(function(item) {
-      views.push(<li key={item.index}><Button variant="outline-danger" size="sm" onClick={this.removeSkill.bind(null, item.index)}>Remove {item.text}</Button></li>
+      views.push(
+      <li key={item.index}>
+        <Button className={styles.thick}
+          variant="outline-danger" 
+          size="sm" 
+          onClick={this.removeSkill.bind(null, item.index)}>
+          Remove
+        </Button>{" "}
+
+        <span className={styles.normal}>
+        {item.text}
+        </span>
+      </li>
       );
     }, this);
     return views;

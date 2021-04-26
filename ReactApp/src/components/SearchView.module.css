@@ -1,0 +1,10 @@
+.normal {
+    color: black;
+    font-weight: normal;
+    font-family: Arial;
+  }
+  
+.thick {
+  color: red;
+  font-weight: bold;
+}
