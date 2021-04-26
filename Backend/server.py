@@ -133,7 +133,7 @@ connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPa
 #     """
 #     query = 'Insert Into Likes (Like1, Like2, Like3, Like4, Like5) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(
 #         Like1, Like2, Like3, Like4, Like5)
-    
+
 #     conn.execute(query)
 #     query_results = conn.execute("Select LAST_INSERT_ID();")
 #     query_results = [x for x in query_results]
@@ -222,12 +222,12 @@ def create():
     insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, %s);'
     cursor = connection.cursor()
     cursor.execute(insert_likes, (data['UserID'], data['Skill'], data['Rating']))
-    
+
     # result = {'success': True, 'response': 'Done'}
 
-  
+
     test = 'Select * From Skills WHERE UserID = ' + data['UserID'] + ';'
-    # test = 'Select * From Skills WHERE 
+    # test = 'Select * From Skills WHERE
 
     cursor = connection.cursor()
     cursor.execute(test)
@@ -287,7 +287,7 @@ def search():
     result = cursor.fetchall()
     if len(result) == 0:
         return jsonify([])
-    
+
     return jsonify(result)
 
 @app.route("/advanced", methods=['POST'])
@@ -302,7 +302,7 @@ def advanced():
     result = cursor.fetchall()
     if len(result) == 0:
         return jsonify([])
-    
+
     return jsonify(result)
 
 @app.route("/findUser", methods=['POST'])
@@ -324,7 +324,7 @@ def findUser():
     result = cursor.fetchall()
     if len(result) == 0:
         return jsonify([])
-    
+
     return jsonify(result)
 
 @app.route("/deleteSkill", methods=['POST'])
@@ -339,8 +339,53 @@ def deleteSkill():
 
     cursor.execute(test, (str(data["UserID"]), data["Skill"]))
     connection.commit()
-    
+
     return jsonify("Success")
+
+# this is used to find your matches, turns likes id into names
+@app.route("/matches", methods=['POST'])
+def searchMatches():
+    data = request.get_json()
+    # this is to used for testing purposes, change to googleid later
+    # change the u.UserId in findLikes
+    cursor = connection.cursor()
+    #will this return likes1-5
+    findLikes =     '''select FirstName, LastName, Major, ClassStanding
+                    from User
+                    where UserId = (select Like1
+                    				from User u NATURAL JOIN Likes l
+                    				where u.UserId = 1)
+                    UNION
+                    select FirstName, LastName, Major, ClassStanding
+                    from User
+                    where UserId = (select Like2
+                    				from User u NATURAL JOIN Likes l
+                    				where u.UserId = 1)
+                    UNION
+                    select FirstName, LastName, Major, ClassStanding
+                    from User
+                    where UserId = (select Like3
+                    				from User u NATURAL JOIN Likes l
+                    				where u.UserId = 1)
+                    UNION
+                    select FirstName, LastName, Major, ClassStanding
+                    from User
+                    where UserId = (select Like4
+                    				from User u NATURAL JOIN Likes l
+                    				where u.UserId = 1)
+                    UNION
+                    select FirstName, LastName, Major, ClassStanding
+                    from User
+                    where UserId = (select Like5
+                    				from User u NATURAL JOIN Likes l
+                    				where u.UserId = 1);
+                                    '''
+    cursor.execute(findLikes)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return jsonify([])
+    print(result)
+    return jsonify(result)
 
 # @app.route("/")
 # def homepage():
