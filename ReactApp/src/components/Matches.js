@@ -51,7 +51,7 @@ class Create extends React.Component {
 
                 <th class="match-name">Name</th>
                 <th class="match-major">Major</th>
-                <th class="match-minor">Class Standing</th>
+                <th class="match-class-standing">Class Standing</th>
                 <th class="match-remove">Remove</th>
             </tr>
             </thead>
