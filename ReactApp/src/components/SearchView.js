@@ -2,7 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
-// var perskill = []
+import {Button} from 'react-bootstrap'
+// import { Link } from 'react-router-dom'
 
 class SearchView extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class SearchView extends React.Component {
       buttons.push({index: i, text: data[i]})
     }
     buttons.forEach(function(item) {
-      views.push(<li key={item.index}><button onClick={this.removeSkill.bind(null, item.index)}>Remove {item.text}</button></li>
+      views.push(<li key={item.index}><Button variant="outline-danger" size="sm" onClick={this.removeSkill.bind(null, item.index)}>Remove {item.text}</Button></li>
       );
     }, this);
     return views;
@@ -45,6 +46,7 @@ class SearchView extends React.Component {
     .then(response => response.json())
     .then((data) => {
       console.log(data)
+      // window.location.reload()
       // console.log(this.state.UserID)
       // window.location.reload()
       // if (data !== "") {
@@ -99,13 +101,21 @@ class SearchView extends React.Component {
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
         <h1>Edit Skills</h1>
-         <button onClick={this.searchLikes}>Show Skills</button>
+        {/* <Link to="/editskills">
+            <Button>
+                  Click Me!
+            </Button>
+        </Link> */}
+         <Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
          {/* <text>{"\n"}</text> */}
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
          {this.state.success ==="t" && 
             <div>
+              <br/>
               {this.renderButtons(this.state.likesData.length, this.state.likesData)}
+              <br/>
             </div>
+            
          }
       </div>
 

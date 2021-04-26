@@ -126,7 +126,7 @@ def findUser():
     name = data['name'].split()
     insert_user = 'Insert IGNORE Into User (UserID, FirstName, LastName) VALUES (%s, %s, %s);'
     # hashed_ID = int(data['UserID']) % 2147483647 #pray for no collisions
-    hashed_ID = get_db_UserID(data['UserID'])
+    hashed_ID = _get_db_UserID(data['UserID'])
     cursor.execute(insert_user, (hashed_ID, name[0], name[1]))
     
     test = 'select * from User WHERE UserID = ' + hashed_ID + ';'
