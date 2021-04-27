@@ -44,6 +44,7 @@ class SearchView extends React.Component {
   }
 
   removeSkill = (i) => {
+    if(window.confirm("Are you sure you want to delete this skill?")) {
     var data =  {
       "UserID": this.state.userID,
       "Skill": this.state.likesData[i][0]
@@ -58,18 +59,27 @@ class SearchView extends React.Component {
     })
     .then(response => response.json())
     .then((data) => {
+      var data2 = {"UserID": this.state.userID}
+      // console.log(data)
+      fetch('http://127.0.0.1:5000/search', {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data2)
+    })
+    .then(response => response.json())
+    .then((data) => {
       console.log(data)
-      // window.location.reload()
-      // console.log(this.state.UserID)
-      // window.location.reload()
-      // if (data !== "") {
-      //     this.setState({success:"t"})
-      // } else {
-      //     this.setState({success:"f"})
-      // }
+      if (data !== "") {
+          this.setState({success:"t", likesData: data})
+      } else {
+          this.setState({success:"f"})
+      }
+    })
     })
     
-  }
+  }}
   
 
   changeUserID = (e) => {
