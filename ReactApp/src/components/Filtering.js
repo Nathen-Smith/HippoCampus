@@ -42,8 +42,6 @@ class Filtering extends React.Component {
     
   }
 
-
-
   render() {
     return (
       <div>
@@ -67,65 +65,10 @@ class Filtering extends React.Component {
                       <br></br>
                       {this.state.likesData[0][3]}
                     </Card.Text>
-                    <Button variant="danger" onClick={likedFunction}>❤</Button>
+                    <Button variant="danger">❤</Button>
                   </Card.Body>
-                </Card>    
+                </Card>     
 
-
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-                  <Card.Body>
-                    <Card.Title>{this.state.likesData[1][0]+ ' '+ this.state.likesData[1][1]}</Card.Title>
-                    <Card.Text>
-                      {this.state.likesData[1][2]}
-                      <br></br>
-                      {this.state.likesData[1][3]}
-                    </Card.Text>
-                    <Button variant="danger" onClick={likedFunction}>❤</Button>
-                  </Card.Body>
-                </Card>    
-
-
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-                  <Card.Body>
-                    <Card.Title>{this.state.likesData[2][0]+ ' '+ this.state.likesData[2][1]}</Card.Title>
-                    <Card.Text>
-                      {this.state.likesData[2][2]}
-                      <br></br>
-                      {this.state.likesData[2][3]}
-                    </Card.Text>
-                    <Button variant="danger" onClick={likedFunction}>❤</Button>
-                  </Card.Body>
-                </Card>    
-
-
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-                  <Card.Body>
-                    <Card.Title>{this.state.likesData[3][0]+ ' '+ this.state.likesData[3][1]}</Card.Title>
-                    <Card.Text>
-                      {this.state.likesData[3][2]}
-                      <br></br>
-                      {this.state.likesData[3][3]}
-                    </Card.Text>
-                    <Button variant="danger" onClick={likedFunction}>❤</Button>
-                  </Card.Body>
-                </Card>    
-
-
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-                  <Card.Body>
-                    <Card.Title>{this.state.likesData[4][0]+ ' '+ this.state.likesData[4][1]}</Card.Title>
-                    <Card.Text>
-                      {this.state.likesData[4][2]}
-                      <br></br>
-                      {this.state.likesData[4][3]}
-                    </Card.Text>
-                    <Button variant="danger" onClick={likedFunction}>❤</Button>
-                  </Card.Body>
-                </Card>    
 
             </div>
          }
@@ -135,9 +78,7 @@ class Filtering extends React.Component {
     )
   }
 }
-function likedFunction() {
-  alert("You liked a buddy (>‿◠)✌");
-  
-}
+
+
 
 export default Filtering;
