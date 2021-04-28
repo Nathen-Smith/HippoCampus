@@ -7,9 +7,9 @@ class Create extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        // UserID: -1,
-        // Skill: -1,
-        // Rating: -1
+      UserID: sessionStorage.getItem("UserID"),
+      Skill: "",
+        Rating: ""
       }
     }
   
@@ -55,20 +55,21 @@ class Create extends React.Component {
     }
   
     render() {
-      console.log(this.state.UserID)
-      console.log(this.state.Skill)
-      console.log(this.state.Rating)
+      // console.log(this.state.UserID)
+      // console.log(this.state.Skill)
+      // console.log(this.state.Rating)
       // console.log(this.state.id4)
       // console.log(this.state.id5)
       return (
         <div>   
           <h1>Insert Skill</h1>  
-          <h2>What ID?</h2>  
+
+          {/* <h2>What ID?</h2>  
           <input
               type="text"
               onChange={this.changeUserID}
               value = {this.state.UserID}
-           />     
+           />      */}
           <h2>What Skill?</h2>
           <input
             type="text"
