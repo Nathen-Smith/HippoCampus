@@ -28,8 +28,8 @@ class SearchView extends React.Component {
       views.push(
       <li key={item.index}>
         <Button className={styles.thick}
-          variant="outline-danger" 
-          size="sm" 
+          variant="outline-danger"
+          size="sm"
           onClick={this.removeSkill.bind(null, item.index)}>
           Remove
         </Button>{" "}
@@ -78,14 +78,14 @@ class SearchView extends React.Component {
       }
     })
     })
-    
+
   }}
-  
+
 
   changeUserID = (e) => {
       this.setState({userID: e.target.value})
   }
-  
+
 
   searchLikes = () => {
     var data =  {
@@ -108,12 +108,12 @@ class SearchView extends React.Component {
           this.setState({success:"f"})
       }
     })
-    
+
   }
   // end = () => {
   //   this.setState({success:"f"})
   // }
-  
+
 
   render() {
     // for (var i = 0; i < this.state.likesData.length; i++  ) {
@@ -132,13 +132,13 @@ class SearchView extends React.Component {
          <Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
          {/* <text>{"\n"}</text> */}
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
-         {this.state.success ==="t" && 
+         {this.state.success ==="t" &&
             <div>
               <br/>
               {this.renderButtons(this.state.likesData.length, this.state.likesData)}
               <br/>
             </div>
-            
+
          }
       </div>
 

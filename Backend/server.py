@@ -128,7 +128,7 @@ def findUser():
     # hashed_ID = int(data['UserID']) % 2147483647 #pray for no collisions
     hashed_ID = _get_db_UserID(data['UserID'])
     cursor.execute(insert_user, (hashed_ID, name[0], name[1]))
-    
+
     test = 'select * from User WHERE UserID = ' + hashed_ID + ';'
     cursor = connection.cursor()
     cursor.execute(test)
@@ -136,7 +136,7 @@ def findUser():
     connection.commit()
     if len(result) == 0:
         return jsonify([])
-    
+
     return jsonify(result)
 
 @app.route("/deleteSkill", methods=['POST'])
@@ -154,6 +154,41 @@ def deleteSkill():
 
     return jsonify("Success")
 
+@app.route("/deletePerson", methods=['POST'])
+def deletePerson():
+    """ recieves post requests to add new task """
+    connection.reconnect()
+    data = request.get_json()
+    hashed_ID = _get_db_UserID(data["UserID"])
+    deleting_ID = str(data["personUserID"])
+    print(deleting_ID)
+    delete_query_like1 = '''  update Likes
+                        set Like1 = IF(Like1 = ''' + deleting_ID + ''', null, Like1)
+                        where UserId = ''' + hashed_ID + '''; '''
+    delete_query_like2 ='''update Likes
+                        set Like2 = IF(Like2 = ''' + deleting_ID + ''', null, Like2)
+                        where UserId = ''' + hashed_ID + ''';'''
+    delete_query_like3 = '''update Likes
+                        set Like3 = IF(Like3 = ''' + deleting_ID + ''', null, Like3)
+                        where UserId = ''' + hashed_ID + ''';'''
+    delete_query_like4 =  '''update Likes
+                        set Like4 = IF(Like4 = ''' + deleting_ID + ''', null, Like4)
+                        where UserId = ''' + hashed_ID + ''';'''
+    delete_query_like5 = '''update Likes
+                        set Like5 = IF(Like5 = ''' + deleting_ID + ''', null, Like5)
+                        where UserId = ''' + hashed_ID + ''';'''
+
+    cursor = connection.cursor()
+
+    cursor.execute(delete_query_like1)
+    cursor.execute(delete_query_like2)
+    cursor.execute(delete_query_like3)
+    cursor.execute(delete_query_like4)
+    cursor.execute(delete_query_like5)
+    connection.commit()
+
+    return jsonify("Success")
+
 # this is used to find your matches, turns likes id into names
 @app.route("/matches", methods=['POST'])
 def searchMatches():
@@ -162,35 +197,38 @@ def searchMatches():
     # change the u.UserId in findLikes
     cursor = connection.cursor()
     #will this return likes1-5
-    findLikes =     '''select FirstName, LastName, Major, ClassStanding
+    hashed_ID = _get_db_UserID(data['UserID'])
+    print(hashed_ID)
+    # hashed_ID = "1" # this is temporary remove when done w testing
+    findLikes =     '''select FirstName, LastName, Major, ClassStanding, UserId
                     from User
                     where UserId = (select Like1
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId =''' + hashed_ID + ''')
                     UNION
-                    select FirstName, LastName, Major, ClassStanding
+                    select FirstName, LastName, Major, ClassStanding, UserId
                     from User
                     where UserId = (select Like2
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = ''' + hashed_ID + ''')
                     UNION
-                    select FirstName, LastName, Major, ClassStanding
+                    select FirstName, LastName, Major, ClassStanding, UserId
                     from User
                     where UserId = (select Like3
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = ''' + hashed_ID + ''')
                     UNION
-                    select FirstName, LastName, Major, ClassStanding
+                    select FirstName, LastName, Major, ClassStanding, UserId
                     from User
                     where UserId = (select Like4
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = ''' + hashed_ID + ''')
                     UNION
-                    select FirstName, LastName, Major, ClassStanding
+                    select FirstName, LastName, Major, ClassStanding, UserId
                     from User
                     where UserId = (select Like5
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1);
+                    				where u.UserId = ''' + hashed_ID + ''');
                                     '''
     cursor.execute(findLikes)
     result = cursor.fetchall()
