@@ -39,14 +39,17 @@ function Login() {
         .then((data) => {
           console.log(data)
           var data_arr = JSON.parse(data)
+          if (data_arr.length !== 0) {
+            sessionStorage.setItem('Age', data_arr[0][1])
+            sessionStorage.setItem('ClassStanding', data_arr[0][2])
+            sessionStorage.setItem('Location', data_arr[0][5])
+            sessionStorage.setItem('Major', data_arr[0][6])
+            sessionStorage.setItem('Minor', data_arr[0][7])
+            sessionStorage.setItem('Bio', data_arr[0][8])
+            sessionStorage.setItem('Statement', data_arr[0][9])
+          }
           // console.log(data_arr[0][0])
-          sessionStorage.setItem('Age', data_arr[0][1])
-          sessionStorage.setItem('ClassStanding', data_arr[0][2])
-          sessionStorage.setItem('Location', data_arr[0][5])
-          sessionStorage.setItem('Major', data_arr[0][6])
-          sessionStorage.setItem('Minor', data_arr[0][7])
-          sessionStorage.setItem('Bio', data_arr[0][8])
-          sessionStorage.setItem('Statement', data_arr[0][9])
+          
           
           var data_availability =  {
             "UserID": res.profileObj.googleId,
@@ -60,10 +63,10 @@ function Login() {
             body: JSON.stringify(data_availability)
           })
           .then(response => response.text())
-          .then((data) => {
+          .then((data2) => {
             // console.log(data)
-            var data_arr2 = JSON.parse(data)
-            console.log(data_arr2)
+            var data_arr2 = JSON.parse(data2)
+            // console.log(data_arr2)
             
             sessionStorage.setItem('AvailableOnMonday', data_arr2[0][1])
             sessionStorage.setItem('AvailableOnTuesday', data_arr2[0][2])

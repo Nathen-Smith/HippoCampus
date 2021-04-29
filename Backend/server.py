@@ -122,12 +122,17 @@ def findUser():
     connection.reconnect()
     cursor = connection.cursor()
     data = request.get_json()
+    hashed_ID = _get_db_UserID(data['UserID'])
 
     name = data['name'].split()
+    # make sure data is in main User db. Also add to others if needed
     insert_user = 'Insert IGNORE Into User (UserID, FirstName, LastName) VALUES (%s, %s, %s);'
-    # hashed_ID = int(data['UserID']) % 2147483647 #pray for no collisions
-    hashed_ID = _get_db_UserID(data['UserID'])
     cursor.execute(insert_user, (hashed_ID, name[0], name[1]))
+
+    insert_user = 'Insert IGNORE Into Availability (UserID) VALUES (' + hashed_ID + ');'
+    cursor.execute(insert_user)
+    # insert_user = 'Insert IGNORE Into Skills (UserID) VALUES (' + hashed_ID + ');'
+    # cursor.execute(insert_user)
 
     test = 'select * from User WHERE UserID = ' + hashed_ID + ';'
     cursor = connection.cursor()

@@ -104,9 +104,9 @@ class Edit extends React.Component {
     })
     .then(response => response.text())
     .then((data) => {
-      // console.log(data)
+      console.log(data)
       var data_arr = JSON.parse(data)
-      console.log(data_arr)
+      // console.log(data_arr)
       
       sessionStorage.setItem('AvailableOnMonday', data_arr[0][1])
       sessionStorage.setItem('AvailableOnTuesday', data_arr[0][2])
