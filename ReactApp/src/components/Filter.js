@@ -1,107 +1,101 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css'
-import FormControl from '@material-ui/core/FormControl';
-// import Form from 'react-bootstrap/Form'
-import Box from '@material-ui/core/Box';
-import '../App.css'
+ import React, { Component } from "react";
+import Checkbox from "./Checkbox";
 
-class Filter extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        UserID: sessionStorage.getItem("UserID")
+const OPTIONS = ["Location", "Major", "Availability", "Class Standing", "Similar Skills"];
+
+class Filter extends Component {
+  state = {
+    checkboxes: OPTIONS.reduce(
+      (options, option) => ({
+        ...options,
+        [option]: false
+      }),
+      {}
+    )
+  };
+
+  selectAllCheckboxes = isSelected => {
+    Object.keys(this.state.checkboxes).forEach(checkbox => {
+      // BONUS: Can you explain why we pass updater function to setState instead of an object?
+      this.setState(prevState => ({
+        checkboxes: {
+          ...prevState.checkboxes,
+          [checkbox]: isSelected
         }
-    }
+      }));
+    });
+  };
 
-    onValueChange(event) {
-        sessionStorage.setItem("CurrentFilter", event.target.value)
-        window.location.reload()
-        // this.setState({UserID: this.state.UserID})
-        // console.log(this.state.UserID)
-    }
+  selectAll = () => this.selectAllCheckboxes(true);
 
-    formSubmit(event) {
-        event.preventDefault();
-        console.log(sessionStorage.getItem("CurrentFilter"))
+  deselectAll = () => this.selectAllCheckboxes(false);
+
+  handleCheckboxChange = changeEvent => {
+    const { name } = changeEvent.target;
+
+    this.setState(prevState => ({
+      checkboxes: {
+        ...prevState.checkboxes,
+        [name]: !prevState.checkboxes[name]
       }
+    }));
+  };
 
-    render () {
-        return (
-            <Box color="black" bgcolor="LightGreen" p={1}> 
-                {/* <div onChange={this.onChangeValue}>          
-                <h1>Filter Cards By</h1>
-                    <input type="radio" value="Location" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Location"}/> Location
-                    <input type="radio" value="Major" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Major"}/> Major
-                    <input type="radio" value="Availability" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Availability"}/> Availability
-                    <input type="radio" value="Class" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Class"}/> Class Standing
-                    <input type="radio" value="NoFilter" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="NoFilter"}/> No Filter           
-                </div> */}
-                <h1>Filter Cards By Your</h1>
-                <form onSubmit={this.formSubmit}>
-                <div className="radio">
-                <label>
-                    <input
-                    type="radio"
-                    value="Location"
-                    checked={sessionStorage.getItem("CurrentFilter") === "Location"}
-                    onChange={this.onValueChange}
-                    />
-                    Location
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input
-                    type="radio"
-                    value="Major"
-                    checked={sessionStorage.getItem("CurrentFilter") === "Major"}
-                    onChange={this.onValueChange}
-                    />
-                    Major
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input
-                    type="radio"
-                    value="Availability"
-                    checked={sessionStorage.getItem("CurrentFilter") === "Availability"}
-                    onChange={this.onValueChange}
-                    />
-                    Availability
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input
-                    type="radio"
-                    value="Class"
-                    checked={sessionStorage.getItem("CurrentFilter") === "Class"}
-                    onChange={this.onValueChange}
-                    />
-                    Class
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input
-                    type="radio"
-                    value="NoFilter"
-                    checked={sessionStorage.getItem("CurrentFilter") === "NoFilter"}
-                    onChange={this.onValueChange}
-                    />
-                    No Filter
-                </label>
-                </div>
-                <div>
-                Selected option is : {sessionStorage.getItem("CurrentFilter")}
-                </div>
-                <button className="btn btn-default" type="submit">
-                Submit
+  handleFormSubmit = formSubmitEvent => {
+    formSubmitEvent.preventDefault();
+
+    Object.keys(this.state.checkboxes)
+      .filter(checkbox => this.state.checkboxes[checkbox])
+      .forEach(checkbox => {
+        console.log(checkbox, "is selected.");
+      });
+  };
+
+  createCheckbox = option => (
+    <Checkbox
+      label={option}
+      isSelected={this.state.checkboxes[option]}
+      onCheckboxChange={this.handleCheckboxChange}
+      key={option}
+    />
+  );
+
+  createCheckboxes = () => OPTIONS.map(this.createCheckbox);
+
+  render() {
+    return (    
+      <div className="container">        
+        <div className="row mt-5">
+          <div className="col-sm-12">
+            <h2>Filter Cards By</h2>
+            <form onSubmit={this.handleFormSubmit}>
+              {this.createCheckboxes()}
+
+              <div className="form-group mt-2">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary mr-2"
+                  onClick={this.selectAll}
+                >
+                  Select All
                 </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary mr-2"
+                  onClick={this.deselectAll}
+                >
+                  Deselect All
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save
+                </button>
+              </div>
             </form>
-            </Box>
-        )
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
+
 export default Filter;

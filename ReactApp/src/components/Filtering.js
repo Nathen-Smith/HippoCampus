@@ -20,7 +20,8 @@ class Filtering extends React.Component {
 
   searchLikes = () => {
     var data =  {
-      "UserID": this.state.userID
+      "UserID": this.state.userID, 
+      "Filter": sessionStorage.getItem("CurrentFilter")
     }
 
     fetch('http://127.0.0.1:5000/filter', {

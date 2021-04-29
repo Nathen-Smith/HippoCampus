@@ -62,7 +62,7 @@ class Create extends React.Component {
       // console.log(this.state.id4)
       // console.log(this.state.id5)
       return (
-        <div>
+        <div className="row mt-1">
           <Box color="black" bgcolor="DarkSeaGreen" p={1}> 
           <h1>Insert Skill</h1>  
 

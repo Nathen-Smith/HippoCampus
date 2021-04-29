@@ -121,7 +121,7 @@ class SearchView extends React.Component {
     //   perskill.push(<button>PLS</button>)
     // }
     return (
-      <div>
+      <div className="row mt-5">
         <Box color="black" bgcolor="DarkSeaGreen" p={1}>
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
