@@ -6,6 +6,7 @@ import Login from "./containers/Login"
 import Logout from "./containers/Logout"
 
 import MatchesTab from "./containers/MatchesTab"
+import CardsTab from "./containers/CardsTab"
 
 import Edit from "./containers/Edit"
 import SearchView from "./components/SearchView"
@@ -16,7 +17,7 @@ import Filter from "./components/Filter"
 // import AuthenticatedRoute from "./components/AuthenticatedRoute";
 // import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 // import { Redirect} from "react-router-dom";
-
+ 
 // on home page, check if there is a UserID somehow
 export default function Routes() {
   return (
@@ -27,6 +28,7 @@ export default function Routes() {
         {/* <Redirect to="/user" /> */}
       <Route exact path="/logout"><Logout /></Route>
       <Route exact path="/matches"><MatchesTab /></Route>
+      <Route exact path="/find"><CardsTab /></Route>
 
       <Route><NotFound /> </Route>
     </Switch>

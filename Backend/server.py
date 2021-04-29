@@ -71,7 +71,7 @@ def delete():
 
     data = request.get_json()
 
-    # delete_likes = 'Delete From (SELECT * FROM Skills WHERE UserID = ' + data["UserID"] + ' and ' + data["Skill"] + ') as temp ;'
+     # delete_likes = 'Delete From (SELECT * FROM Skills WHERE UserID = ' + data["UserID"] + ' and ' + data["Skill"] + ') as temp ;'
     delete_likes = 'DELETE FROM Skills WHERE UserID = ' + data["UserID"] + ';'
     cursor = connection.cursor()
     cursor.execute(delete_likes)
@@ -105,7 +105,7 @@ def search():
 def advanced():
     """ recieves post requests to add new task """
 
-    # data = request.get_json()
+    #data = request.get_json()
 
     cursor = connection.cursor()
     test = "SELECT FirstName, LastName, CEIL(avg_rating) FROM (SELECT FirstName, LastName, AVG(Rating) as avg_rating FROM Skills NATURAL JOIN User WHERE Skill = 'coding' OR Skill = 'addition' GROUP BY UserID) as temp ORDER BY CEIL(avg_rating) DESC;"
@@ -114,6 +114,19 @@ def advanced():
     if len(result) == 0:
         return jsonify([])
 
+    return jsonify(result)
+@app.route("/filter", methods=['POST'])
+def filter():
+    """ recieves post requests to add new task """
+
+    #data = request.get_json()
+
+    cursor = connection.cursor()
+    filterBy = "SELECT FirstName, LastName, ClassStanding, Major, Bio FROM User WHERE Major = 'CS'"
+    cursor.execute(filterBy)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return jsonify([])
     return jsonify(result)
 
 @app.route("/getUserInfo", methods=['POST'])
@@ -136,6 +149,8 @@ def getUserInfo():
 @app.route("/findUser", methods=['POST'])
 def findUser():
     """ recieves post requests to add new task """
+
+    data = request.get_json()
     connection.reconnect()
     cursor = connection.cursor()
     data = request.get_json()
