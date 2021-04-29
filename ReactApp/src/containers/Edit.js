@@ -140,7 +140,7 @@ class Edit extends React.Component {
   }
 
   updateInfo = () => {
-    this.updateAvailability()
+    // this.updateAvailability()
     this.updateUser()
   }
 
@@ -195,6 +195,7 @@ class Edit extends React.Component {
             onChange={this.changeStatement}
             value={this.state.Statement}
          />
+        <button onClick={this.updateUser}>Update User Info</button>
         <h2>Available on Monday</h2>
         <input
             type="text"
@@ -237,7 +238,7 @@ class Edit extends React.Component {
             onChange={this.changeSunday}
             value={this.state.AvailableOnSunday}
          />
-         <button onClick={this.updateInfo}>Update Info</button>
+         <button onClick={this.updateAvailability}>Update Availability</button>
         
      
       </div>
