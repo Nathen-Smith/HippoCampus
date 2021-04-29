@@ -22,40 +22,6 @@ class Edit extends React.Component {
         AvailableOnFriday: sessionStorage.getItem('AvailableOnFriday'),
         AvailableOnSaturday: sessionStorage.getItem('AvailableOnSaturday'),
         AvailableOnSunday: sessionStorage.getItem('AvailableOnSunday')
-
-    // var data =  {
-    //   "UserID": sessionStorage.getItem("UserID")
-    // }
-
-    // fetch('http://127.0.0.1:5000/getUserInfo', {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify(data)
-    // })
-    // .then(response => response.json())
-    // .then((data) => {
-    //   console.log(data)
-    //   if (data !== "") {
-    //       // this.setState({success:"t", userData: data})
-    //   } else {
-    //       // this.setState({success:"f"})
-    //   }
-    // })
-    // console.log(this.state.userData)
-    // if (this.state.success === 't'){
-    //   this.setState({Age : this.state.userData[0][1]})
-    //   this.setState({ClassStanding : this.state.userData[0][2]})
-    //   this.setState({Location : this.state.userData[0][5]})
-    //   this.setState({Major: this.state.userData[0][6]})
-    //   this.setState({Minor: this.state.userData[0][7]})
-    //   this.setState({Bio: this.state.userData[0][8]})
-    //   this.setState({Statement: this.state.userData[0][9]})
-    // }
-    // else{
-    //   console.log('haha loser')
-    // }
   }
 }
 
@@ -190,10 +156,6 @@ class Edit extends React.Component {
     
   }
 
-  updateInfo = () => {
-    // this.updateAvailability()
-    this.updateUser()
-  }
 
   render() {
     // console.log(this.state.id1)
@@ -204,7 +166,7 @@ class Edit extends React.Component {
     return (
       <div>
         <Box color="white" bgcolor="DarkOliveGreen" p={1}>
-          <h1>Update Info</h1>
+          <h1>Update Your Profile</h1>
           <h2>Age</h2>
           <input
               type="text"
@@ -250,43 +212,44 @@ class Edit extends React.Component {
           <button onClick={this.updateUser}>Update User Info</button>
         </Box>
         <Box color="black" bgcolor="DarkKhaki" p={1}>
-        <h3>Available on Monday</h3>
+        <h1>Update Your Availability</h1>
+        <h2>Available on Monday</h2>
         <input
             type="text"
             onChange={this.changeMonday}
             value={this.state.AvailableOnMonday}
          />
-        <h3>Available on Tuesday</h3>
+        <h2>Available on Tuesday</h2>
         <input
             type="text"
             onChange={this.changeTuesday}
             value={this.state.AvailableOnTuesday}
          />
-        <h3>Available on Wednesday</h3>
+        <h2>Available on Wednesday</h2>
         <input
             type="text"
             onChange={this.changeWednesday}
             value={this.state.AvailableOnWednesday}
          />
-        <h3>Available on Thursday</h3>
+        <h2>Available on Thursday</h2>
         <input
             type="text"
             onChange={this.changeThursday}
             value={this.state.AvailableOnThursday}
          />
-        <h3>Available on Friday</h3>
+        <h2>Available on Friday</h2>
         <input
             type="text"
             onChange={this.changeFriday}
             value={this.state.AvailableOnFriday}
          />
-        <h3>Available on Saturday</h3>
+        <h2>Available on Saturday</h2>
         <input
             type="text"
             onChange={this.changeSaturday}
             value={this.state.AvailableOnSaturday}
          />
-        <h3>Available on Sunday</h3>
+        <h2>Available on Sunday</h2>
         <input
             type="text"
             onChange={this.changeSunday}

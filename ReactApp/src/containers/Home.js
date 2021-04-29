@@ -16,7 +16,7 @@ export default function Home() {
                     {/* <p className="text-muted">Logged in!</p> */}
                     {/* <SearchView></SearchView><br /> */}
                     <LinkContainer to="/edit">
-                <Nav.Link >Edit</Nav.Link>
+                <Nav.Link >Edit Profile</Nav.Link>
 
               </LinkContainer>
               <LinkContainer to="/find">
