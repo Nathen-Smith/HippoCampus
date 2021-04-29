@@ -116,6 +116,23 @@ def advanced():
 
     return jsonify(result)
 
+@app.route("/getUserInfo", methods=['POST'])
+def getUserInfo():
+    """ recieves post requests to add new task """
+
+    data = request.get_json()
+
+    cursor = connection.cursor()
+    # test = 'Select * From User Where UserID = ' + _get_db_UserID(data["UserID"]) + ';'
+    test = 'Select * From Skills Where UserID = 5 ;'
+
+    cursor.execute(test)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return jsonify([])
+
+    return jsonify(result)   
+
 @app.route("/findUser", methods=['POST'])
 def findUser():
     """ recieves post requests to add new task """
@@ -124,10 +141,10 @@ def findUser():
     data = request.get_json()
 
     name = data['name'].split()
-    insert_user = 'Insert IGNORE Into User (UserID, FirstName, LastName) VALUES (%s, %s, %s);'
+    insert_user = 'Insert Into User User (UserID, Age, ClassStanding, FirstName, LastName, Location, Major, Minor, Bio, Statement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'
     # hashed_ID = int(data['UserID']) % 2147483647 #pray for no collisions
     hashed_ID = _get_db_UserID(data['UserID'])
-    cursor.execute(insert_user, (hashed_ID, name[0], name[1]))
+    cursor.execute(insert_user, (hashed_ID, '0', '', name[0], name[1], '', '', '', '', '', ''))
     
     test = 'select * from User WHERE UserID = ' + hashed_ID + ';'
     cursor = connection.cursor()
