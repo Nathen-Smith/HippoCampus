@@ -237,6 +237,60 @@ def searchMatches():
     print(result)
     return jsonify(result)
 
+
+@app.route("/updateAvailability", methods=['POST'])
+def updateAvailability():
+    """ recieves post requests to add new task """    
+
+    data = request.get_json()
+
+    connection.reconnect()
+
+    hashed_ID = _get_db_UserID(data['UserID'])
+    update_availability = 'REPLACE INTO Availability (UserID, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);'
+    cursor = connection.cursor()
+    cursor.execute(update_availability, (hashed_ID, data['Monday'], data['Tuesday'], data['Wednesday'], data['Thursday'], data['Friday'], data['Saturday'], data['Sunday']))
+
+    #result = {'success': True, 'response': 'Done'}
+
+    # cursor = connection.cursor()
+    connection.commit()
+    connection.reconnect()
+    cursor = connection.cursor()
+
+    test = 'Select * From Availability Where UserID = ' + hashed_ID + ';'
+    # above does not return anything for some reason
+    cursor.execute(test)
+    result = cursor.fetchall()
+    # if len(result) == 0:
+    #     return jsonify([])
+
+    return jsonify(result)
+
+@app.route("/updateUser", methods=['POST'])
+def updateUser():
+    """ recieves post requests to add new task """
+
+    data = request.get_json()
+
+    connection.reconnect()
+
+    hashed_ID = _get_db_UserID(data['UserID'])
+    update_user = 'REPLACE INTO User (UserID, Age, ClassStanding, FirstName, LastName, Location, Major, Minor, Bio, Statement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+    cursor = connection.cursor()
+    cursor.execute(update_user, (hashed_ID, data['Age'], data['ClassStanding'], data['FirstName'], data["LastName"], data["Location"], data["Major"], data["Minor"], data["Bio"], data["Statement"]))
+ 
+    connection.commit()
+    connection.reconnect()
+    #result = {'success': True, 'response': 'Done'}
+
+    cursor = connection.cursor()
+    test = 'Select * From User Where UserID = ' + hashed_ID + ';'
+    cursor.execute(test)
+    result = cursor.fetchall()
+    
+    return jsonify(result)
+
 # @app.route("/")
 # def homepage():
 #     """ returns rendered homepage """

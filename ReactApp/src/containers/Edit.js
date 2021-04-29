@@ -7,20 +7,20 @@ class Edit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        "Age" : -1,
-        "ClassStanding" : '',
-        "Location" : '',
-        "Major" : '',
-        "Minor" : '',
-        "Bio" : '',
-        "Statement" : '',
-        "Available on Monday": -1,
-        "Available on Tuesday": -1,
-        "Available on Wednesday": -1,
-        "Available on Thursday": -1,
-        "Available on Friday": -1,
-        "Available on Saturday": -1,
-        "Available on Sunday": -1
+        Age : -1,
+        ClassStanding : '',
+        Location : '',
+        Major : '',
+        Minor : '',
+        Bio : '',
+        Statement : '',
+        AvailableOnMonday: 0,
+        AvailableOnTuesday: 0,
+        AvailableOnWednesday: 0,
+        AvailableOnThursday: 0,
+        AvailableOnFriday: 0,
+        AvailableOnSaturday: 0,
+        AvailableOnSunday: 0
 
     }
     
@@ -82,26 +82,20 @@ class Edit extends React.Component {
     this.setState({AvailableOnSunday: e.target.value})
   }
 
-
-  updateInfo = () => {
+  updateAvailability = () => {
     var data =  {
-        "Age" : -1,
-        "ClassStanding" : '',
-        "Location" : '',
-        "Major" : '',
-        "Minor" : '',
-        "Bio" : '',
-        "Statement" : '',
-        "AvailableOnMonday": -1,
-        "AvailableOnTuesday": -1,
-        "AvailableOnWednesday": -1,
-        "AvailableOnThursday": -1,
-        "AvailableOnFriday": -1,
-        "AvailableOnSaturday": -1,
-        "AvailableOnSunday": -1
+      UserID: sessionStorage.getItem("UserID"),
+      Monday : this.state.AvailableOnMonday,
+      Tuesday : this.state.AvailableOnTuesday,
+      Wednesday : this.state.AvailableOnWednesday,
+      Thursday : this.state.AvailableOnThursday,
+      Friday : this.state.AvailableOnFriday,
+      Saturday : this.state.AvailableOnSaturday,
+      Sunday : this.state.AvailableOnSunday
     }
+    // console.log(data)
 
-    fetch('http://127.0.0.1:5000/update', {
+    fetch('http://127.0.0.1:5000/updateAvailability', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -113,6 +107,41 @@ class Edit extends React.Component {
       console.log(data)
     })
     
+  }
+
+
+  updateUser = () => {
+    var name = sessionStorage.getItem("name").split(" ")
+    var data =  {
+        UserID: sessionStorage.getItem("UserID"),
+        Age : this.state.Age,
+        ClassStanding : this.state.ClassStanding,
+        FirstName : name[0],
+        LastName : name[1],
+        Location : this.state.Location,
+        Major : this.state.Major,
+        Minor : this.state.Minor,
+        Bio : this.state.Bio,
+        Statement : this.state.Statement
+    }
+
+    fetch('http://127.0.0.1:5000/updateUser', {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then((data) => {
+      console.log(data)
+    })
+    
+  }
+
+  updateInfo = () => {
+    // this.updateAvailability()
+    this.updateUser()
   }
 
   render() {
@@ -166,6 +195,7 @@ class Edit extends React.Component {
             onChange={this.changeStatement}
             value={this.state.Statement}
          />
+        <button onClick={this.updateUser}>Update User Info</button>
         <h2>Available on Monday</h2>
         <input
             type="text"
@@ -208,7 +238,7 @@ class Edit extends React.Component {
             onChange={this.changeSunday}
             value={this.state.AvailableOnSunday}
          />
-         <button onClick={this.updateInfo}>Update Info</button>
+         <button onClick={this.updateAvailability}>Update Availability</button>
         
      
       </div>
