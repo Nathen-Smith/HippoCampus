@@ -89,7 +89,7 @@ def delete():
 @app.route("/search", methods=['POST'])
 def search():
     """ recieves post requests to add new task """
-
+    connection.reconnect()
     data = request.get_json()
 
     cursor = connection.cursor()
@@ -115,10 +115,11 @@ def advanced():
         return jsonify([])
 
     return jsonify(result)
-@app.route("/filter", methods=['POST'])
+
+@app.route("/filter", methods=['POST']) #PALLAVI
 def filter():
     """ recieves post requests to add new task """
-
+    connection.reconnect()
     #data = request.get_json()
 
     cursor = connection.cursor()
@@ -129,14 +130,34 @@ def filter():
         return jsonify([])
     return jsonify(result)
 
+@app.route("/addLike", methods=['POST']) #PALLAVI
+def addLike():
+    """ recieves post requests to add new task """
+    connection.reconnect()
+    cursor = connection.cursor()
+    data = request.get_json()
+
+    like_num = 0
+    # loop through likes and check which like is empty and fill in the like_
+    for i in range(1,5):
+        test = "SELECT Like%d FROM Likes WHERE UserID = %s"
+        cursor.execute(test, i, _get_db_UserID(data["UserID"]))
+        if cursor.fetchall() is None:
+            like_num = i
+
+    if like_num == 0:
+        return jsonify("Failure")
+
+    test = 'UPDATE Likes SET Like" + %d + " = %s WHERE UserID = %s'
+
+    cursor.execute(test, (like_num, data["LikedID"], _get_db_UserID(data["UserID"])))
+    connection.commit()
+
+    return jsonify("Success")
+
 @app.route("/findUser", methods=['POST'])
 def findUser():
     """ recieves post requests to add new task """
-<<<<<<< HEAD
-
-    data = request.get_json()
-=======
->>>>>>> main
     connection.reconnect()
     cursor = connection.cursor()
     data = request.get_json()
@@ -184,31 +205,31 @@ def searchMatches():
                     from User
                     where UserId = (select Like1
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = 5)
                     UNION
                     select FirstName, LastName, Major, ClassStanding
                     from User
                     where UserId = (select Like2
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = 5)
                     UNION
                     select FirstName, LastName, Major, ClassStanding
                     from User
                     where UserId = (select Like3
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = 5)
                     UNION
                     select FirstName, LastName, Major, ClassStanding
                     from User
                     where UserId = (select Like4
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1)
+                    				where u.UserId = 5)
                     UNION
                     select FirstName, LastName, Major, ClassStanding
                     from User
                     where UserId = (select Like5
                     				from User u NATURAL JOIN Likes l
-                    				where u.UserId = 1);
+                    				where u.UserId = 5);
                                     '''
     cursor.execute(findLikes)
     result = cursor.fetchall()
