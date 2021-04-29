@@ -131,7 +131,7 @@ class SearchView extends React.Component {
                   Click Me!
             </Button>
         </Link> */}
-         <Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
+         <Button variant="secondary" onClick={this.searchLikes}>Show Skills</Button>
          {/* <text>{"\n"}</text> */}
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
          {this.state.success ==="t" &&
