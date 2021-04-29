@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
+import Box from '@material-ui/core/Box';
 import '../App.css'
 
 class Create extends React.Component {
@@ -61,7 +62,8 @@ class Create extends React.Component {
       // console.log(this.state.id4)
       // console.log(this.state.id5)
       return (
-        <div>   
+        <div>
+          <Box color="black" bgcolor="DarkSeaGreen" p={1}> 
           <h1>Insert Skill</h1>  
 
           {/* <h2>What ID?</h2>  
@@ -85,7 +87,7 @@ class Create extends React.Component {
           />
            <button onClick={this.insertLikes}>Insert Skill</button>
           
-       
+        </Box>
         </div>
   
       )

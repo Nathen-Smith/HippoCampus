@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
 import {Button} from 'react-bootstrap'
+import Box from '@material-ui/core/Box';
 import styles from './SearchView.module.css';
 // import { Link } from 'react-router-dom'
 
@@ -121,6 +122,7 @@ class SearchView extends React.Component {
     // }
     return (
       <div>
+        <Box color="black" bgcolor="DarkSeaGreen" p={1}>
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
         <h1>Edit Skills</h1>
@@ -140,6 +142,7 @@ class SearchView extends React.Component {
             </div>
 
          }
+         </Box>
       </div>
 
     )

@@ -116,6 +116,23 @@ def advanced():
 
     return jsonify(result)
 
+@app.route("/getUserInfo", methods=['POST'])
+def getUserInfo():
+    """ recieves post requests to add new task """
+
+    data = request.get_json()
+
+    cursor = connection.cursor()
+    # test = 'Select * From User Where UserID = ' + _get_db_UserID(data["UserID"]) + ';'
+    test = 'Select * From Skills Where UserID = 5 ;'
+
+    cursor.execute(test)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return jsonify([])
+
+    return jsonify(result)   
+
 @app.route("/findUser", methods=['POST'])
 def findUser():
     """ recieves post requests to add new task """

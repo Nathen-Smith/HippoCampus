@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
+import Box from '@material-ui/core/Box';
 import '../App.css'
 
 class Edit extends React.Component {
@@ -22,8 +23,39 @@ class Edit extends React.Component {
         AvailableOnSaturday: sessionStorage.getItem('AvailableOnSaturday'),
         AvailableOnSunday: sessionStorage.getItem('AvailableOnSunday')
 
-    }
-    
+    // var data =  {
+    //   "UserID": sessionStorage.getItem("UserID")
+    // }
+
+    // fetch('http://127.0.0.1:5000/getUserInfo', {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   method: "POST",
+    //   body: JSON.stringify(data)
+    // })
+    // .then(response => response.json())
+    // .then((data) => {
+    //   console.log(data)
+    //   if (data !== "") {
+    //       // this.setState({success:"t", userData: data})
+    //   } else {
+    //       // this.setState({success:"f"})
+    //   }
+    // })
+    // console.log(this.state.userData)
+    // if (this.state.success === 't'){
+    //   this.setState({Age : this.state.userData[0][1]})
+    //   this.setState({ClassStanding : this.state.userData[0][2]})
+    //   this.setState({Location : this.state.userData[0][5]})
+    //   this.setState({Major: this.state.userData[0][6]})
+    //   this.setState({Minor: this.state.userData[0][7]})
+    //   this.setState({Bio: this.state.userData[0][8]})
+    //   this.setState({Statement: this.state.userData[0][9]})
+    // }
+    // else{
+    //   console.log('haha loser')
+    // }
   }
 
   changeAge = (e) => {
@@ -170,94 +202,97 @@ class Edit extends React.Component {
     // console.log(this.state.id5)
     return (
       <div>
-        <h1>Update Info</h1>
-        <h2>Age</h2>
-        <input
-            type="text"
-            onChange={this.changeAge}
-            value = {this.state.Age}
-         />
-        <h2>Class Standing</h2>
-        <input
-            type="text"
-            onChange={this.changeClassStanding}
-            value = {this.state.ClassStanding}
-         />
-         <h2>Location</h2>
-        <input
-            type="text"
-            onChange={this.changeLocation}
-            value = {this.state.Location}
-         />
-         <h2>Major</h2>
-        <input
-            type="text"
-            onChange={this.changeMajor}
-            value = {this.state.Major}
-         />
-         <h2>Minor</h2>
-        <input
-            type="text"
-            onChange={this.changeMinor}
-            value = {this.state.Minor}
-         />
-         <h2>Bio</h2>
-        <input
-            type="text"
-            onChange={this.changeBio}
-            value={this.state.Bio}
-         />
-         <h2>Statement</h2>
-        <input
-            type="text"
-            onChange={this.changeStatement}
-            value={this.state.Statement}
-         />
-        <button onClick={this.updateUser}>Update User Info</button>
-        <h2>Available on Monday</h2>
+        <Box color="white" bgcolor="DarkOliveGreen" p={1}>
+          <h1>Update Info</h1>
+          <h2>Age</h2>
+          <input
+              type="text"
+              onChange={this.changeAge}
+              value = {this.state.Age}
+          />
+          <h2>Class Standing</h2>
+          <input
+              type="text"
+              onChange={this.changeClassStanding}
+              value = {this.state.ClassStanding}
+          />
+          <h2>Location</h2>
+          <input
+              type="text"
+              onChange={this.changeLocation}
+              value = {this.state.Location}
+          />
+          <h2>Major</h2>
+          <input
+              type="text"
+              onChange={this.changeMajor}
+              value = {this.state.Major}
+          />
+          <h2>Minor</h2>
+          <input
+              type="text"
+              onChange={this.changeMinor}
+              value = {this.state.Minor}
+          />
+          <h2>Bio</h2>
+          <input
+              type="text"
+              onChange={this.changeBio}
+              value={this.state.Bio}
+          />
+          <h2>Statement</h2>
+          <input
+              type="text"
+              onChange={this.changeStatement}
+              value={this.state.Statement}
+          />
+          <button onClick={this.updateUser}>Update User Info</button>
+        </Box>
+        <Box color="black" bgcolor="DarkKhaki" p={1}>
+        <h3>Available on Monday</h3>
         <input
             type="text"
             onChange={this.changeMonday}
             value={this.state.AvailableOnMonday}
          />
-        <h2>Available on Tuesday</h2>
+        <h3>Available on Tuesday</h3>
         <input
             type="text"
             onChange={this.changeTuesday}
             value={this.state.AvailableOnTuesday}
          />
-        <h2>Available on Wednesday</h2>
+        <h3>Available on Wednesday</h3>
         <input
             type="text"
             onChange={this.changeWednesday}
             value={this.state.AvailableOnWednesday}
          />
-        <h2>Available on Thursday</h2>
+        <h3>Available on Thursday</h3>
         <input
             type="text"
             onChange={this.changeThursday}
             value={this.state.AvailableOnThursday}
          />
-        <h2>Available on Friday</h2>
+        <h3>Available on Friday</h3>
         <input
             type="text"
             onChange={this.changeFriday}
             value={this.state.AvailableOnFriday}
          />
-        <h2>Available on Saturday</h2>
+        <h3>Available on Saturday</h3>
         <input
             type="text"
             onChange={this.changeSaturday}
             value={this.state.AvailableOnSaturday}
          />
-        <h2>Available on Sunday</h2>
+        <h3>Available on Sunday</h3>
         <input
             type="text"
             onChange={this.changeSunday}
             value={this.state.AvailableOnSunday}
          />
          <button onClick={this.updateAvailability}>Update Availability</button>
-        
+         </Box>  
      
       </div>
 
