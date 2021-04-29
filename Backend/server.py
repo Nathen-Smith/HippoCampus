@@ -291,6 +291,21 @@ def updateUser():
     
     return jsonify(result)
 
+@app.route("/autoFillDays", methods=['POST'])
+def autoFillDays():
+    """ recieves post requests to add new task """
+    connection.reconnect()
+
+    data = request.get_json()
+
+    test = 'SELECT * From Availability Where UserID = ' + _get_db_UserID(data["UserID"]) + ';'
+    cursor = connection.cursor()
+
+    cursor.execute(test)
+    result = cursor.fetchall()
+
+    return jsonify(result)
+
 # @app.route("/")
 # def homepage():
 #     """ returns rendered homepage """

@@ -7,20 +7,20 @@ class Edit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        Age : -1,
-        ClassStanding : '',
-        Location : '',
-        Major : '',
-        Minor : '',
-        Bio : '',
-        Statement : '',
-        AvailableOnMonday: 0,
-        AvailableOnTuesday: 0,
-        AvailableOnWednesday: 0,
-        AvailableOnThursday: 0,
-        AvailableOnFriday: 0,
-        AvailableOnSaturday: 0,
-        AvailableOnSunday: 0
+        Age : sessionStorage.getItem('Age'),
+        ClassStanding : sessionStorage.getItem('ClassStanding'),
+        Location : sessionStorage.getItem('Location'),
+        Major : sessionStorage.getItem('Major'),
+        Minor : sessionStorage.getItem('Minor'),
+        Bio : sessionStorage.getItem('Bio'),
+        Statement : sessionStorage.getItem('Statement'),
+        AvailableOnMonday: sessionStorage.getItem('AvailableOnMonday'),
+        AvailableOnTuesday: sessionStorage.getItem('AvailableOnTuesday'),
+        AvailableOnWednesday: sessionStorage.getItem('AvailableOnWednesday'),
+        AvailableOnThursday: sessionStorage.getItem('AvailableOnThursday'),
+        AvailableOnFriday: sessionStorage.getItem('AvailableOnFriday'),
+        AvailableOnSaturday: sessionStorage.getItem('AvailableOnSaturday'),
+        AvailableOnSunday: sessionStorage.getItem('AvailableOnSunday')
 
     }
     
@@ -104,7 +104,17 @@ class Edit extends React.Component {
     })
     .then(response => response.text())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
+      var data_arr = JSON.parse(data)
+      console.log(data_arr)
+      
+      sessionStorage.setItem('AvailableOnMonday', data_arr[0][1])
+      sessionStorage.setItem('AvailableOnTuesday', data_arr[0][2])
+      sessionStorage.setItem('AvailableOnWednesday', data_arr[0][3])
+      sessionStorage.setItem('AvailableOnThursday', data_arr[0][4])
+      sessionStorage.setItem('AvailableOnFriday', data_arr[0][5])
+      sessionStorage.setItem('AvailableOnSaturday', data_arr[0][6])
+      sessionStorage.setItem('AvailableOnSunday', data_arr[0][7])
     })
     
   }
@@ -135,6 +145,14 @@ class Edit extends React.Component {
     .then(response => response.text())
     .then((data) => {
       console.log(data)
+      var data_arr = JSON.parse(data)
+      sessionStorage.setItem('Age', data_arr[0][1])
+      sessionStorage.setItem('ClassStanding', data_arr[0][2])
+      sessionStorage.setItem('Location', data_arr[0][5])
+      sessionStorage.setItem('Major', data_arr[0][6])
+      sessionStorage.setItem('Minor', data_arr[0][7])
+      sessionStorage.setItem('Bio', data_arr[0][8])
+      sessionStorage.setItem('Statement', data_arr[0][9])
     })
     
   }
