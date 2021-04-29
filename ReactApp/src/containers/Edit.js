@@ -57,6 +57,7 @@ class Edit extends React.Component {
     //   console.log('haha loser')
     // }
   }
+}
 
   changeAge = (e) => {
     this.setState({Age: e.target.value})
