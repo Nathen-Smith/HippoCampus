@@ -16,6 +16,7 @@ function Login() {
     console.log('Login Success: currentUser:', res.profileObj);
     sessionStorage.setItem('UserID', res.profileObj.googleId);
     sessionStorage.setItem('name', res.profileObj.name);
+    sessionStorage.setItem('CurrentFilter', "NoFilter")
 
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍.`

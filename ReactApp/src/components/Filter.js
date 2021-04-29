@@ -9,19 +9,26 @@ class Filter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        UserID: sessionStorage.getItem("UserID"),
-        MajorFilter: ''
+        UserID: sessionStorage.getItem("UserID")
         }
     }
+
+    onChangeValue(event) {
+        sessionStorage.setItem("CurrentFilter", event.target.value)
+    }
+
     render () {
         return (
-            <div>
-            <h1>Filter By</h1>
-            <input type="radio" value="Location" name="filter" /> Location
-            <input type="radio" value="Major" name="filter" /> Major
-            <input type="radio" value="Availability" name="filter" /> Availability
-            <input type="radio" value="Class Standing" name="filter" /> Class Standing
-          </div>
+            <Box color="black" bgcolor="LightGreen" p={1}> 
+                <div onChange={this.onChangeValue}>          
+                <h1>Filter Cards By</h1>
+                    <input type="radio" value="Location" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Location"}/> Location
+                    <input type="radio" value="Major" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Major"}/> Major
+                    <input type="radio" value="Availability" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Availability"}/> Availability
+                    <input type="radio" value="Class" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="Class"}/> Class Standing
+                    <input type="radio" value="NoFilter" name="filter" checked={sessionStorage.getItem("CurrentFilter")==="NoFilter"}/> No Filter           
+                </div>
+            </Box>
         )
     }
 }
