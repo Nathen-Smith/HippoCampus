@@ -164,7 +164,7 @@ class Edit extends React.Component {
     // console.log(this.state.id4)
     // console.log(this.state.id5)
     return (
-      <div>
+      <div className="row mt-5">
         <Box color="white" bgcolor="DarkOliveGreen" p={1}>
           <h1>Update Your Profile</h1>
           <h2>Age</h2>

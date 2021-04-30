@@ -121,7 +121,7 @@ class SearchView extends React.Component {
     //   perskill.push(<button>PLS</button>)
     // }
     return (
-      <div>
+      <div className="row mt-5">
         <Box color="black" bgcolor="DarkSeaGreen" p={1}>
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
@@ -131,7 +131,7 @@ class SearchView extends React.Component {
                   Click Me!
             </Button>
         </Link> */}
-         <Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
+         <Button variant="secondary" onClick={this.searchLikes}>Show Skills</Button>
          {/* <text>{"\n"}</text> */}
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
          {this.state.success ==="t" &&
