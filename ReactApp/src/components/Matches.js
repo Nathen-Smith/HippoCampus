@@ -103,7 +103,7 @@ class Create extends React.Component {
       return (
 
         <div>
-        <button onClick={this.searchMatches}> Load Matches </button>
+        <button onClick={this.searchMatches}> Load Favorites </button>
         {this.state.success === "t" &&
           <div>
             <table class="table">

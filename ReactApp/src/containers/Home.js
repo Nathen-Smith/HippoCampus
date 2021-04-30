@@ -21,13 +21,13 @@ export default function Home() {
 
               </LinkContainer>
               <LinkContainer to="/find">
-                <Nav.Link >Find Matches</Nav.Link>
+                <Nav.Link >Find Study Buddies</Nav.Link>
 
               </LinkContainer>
 
               <LinkContainer to = "/matches">
-                <Nav.Link>Matches</Nav.Link>
-                 
+                <Nav.Link>Favorites</Nav.Link>
+
               </LinkContainer>
 
                 </div>
