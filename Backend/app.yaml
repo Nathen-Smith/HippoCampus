@@ -1,0 +1,4 @@
+runtime: nodejs # or another supported version
+env: flex
+beta_settings:
+  cloud_sql_instances: hippocampus-309101:us-central1:hippocampus2
