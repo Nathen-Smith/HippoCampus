@@ -115,19 +115,147 @@ def advanced():
         return jsonify([])
 
     return jsonify(result)
+
 @app.route("/filter", methods=['POST'])
 def filter():
     """ recieves post requests to add new task """
 
     data = request.get_json()
-
+    hashed_ID = _get_db_UserID(data["UserID"])
     cursor = connection.cursor()
-    filterBy = "SELECT FirstName, LastName, ClassStanding, Major, Bio FROM User WHERE Major = 'CS';"
-    cursor.execute(filterBy)
-    result = cursor.fetchall()
-    if len(result) == 0:
-        return jsonify([])
-    return jsonify(result)
+
+    proc =  '''
+            CREATE DEFINER=`root`@`%` PROCEDURE `Filter`(
+                IN my_id INTEGER)
+            BEGIN
+                DECLARE curr_FirstName VARCHAR(30);
+                DECLARE curr_LastName VARCHAR(30);
+                DECLARE curr_Major VARCHAR(20);
+                DECLARE curr_ClassStanding VARCHAR(20);
+                DECLARE curr_Bio VARCHAR(300);
+
+                DECLARE curr_pref VARCHAR(30);
+                DECLARE exit_loop BOOLEAN DEFAULT FALSE;
+
+                DECLARE prefs_cur CURSOR FOR (SELECT Preference FROM Preferences WHERE UserID = my_id);
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET exit_loop = TRUE;
+
+                DROP TABLE IF EXISTS Similar_Skills_Table;
+                DROP TABLE IF EXISTS Similar_Major_Table;
+                DROP TABLE IF EXISTS Similar_ClassStanding_Table;
+
+                CREATE TABLE Similar_Skills_Table (
+                    FirstName VARCHAR(30),
+                    LastName VARCHAR(30),
+                    Major VARCHAR(20),
+                    ClassStanding VARCHAR(20),
+                    Bio VARCHAR(300)
+                );
+                CREATE TABLE Similar_Major_Table (
+                    FirstName VARCHAR(30),
+                    LastName VARCHAR(30),
+                    Major VARCHAR(20),
+                    ClassStanding VARCHAR(20),
+                    Bio VARCHAR(300)
+                );
+                CREATE TABLE Similar_ClassStanding_Table (
+                    FirstName VARCHAR(30),
+                    LastName VARCHAR(30),
+                    Major VARCHAR(20),
+                    ClassStanding VARCHAR(20),
+                    Bio VARCHAR(300)
+                );
+
+                OPEN prefs_cur;
+                    REPEAT
+                        FETCH prefs_cur INTO curr_pref;
+
+                        IF (curr_pref = 'Similar Skills') THEN
+                            BEGIN
+
+                                DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
+                                DECLARE skill_cur CURSOR FOR (
+                                    SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    FROM Skills NATURAL JOIN User
+                                    WHERE Skill IN (
+                                        SELECT Skill FROM Skills WHERE UserID = my_id ORDER BY Rating DESC
+                                    ) AND UserID <> my_id
+                                );
+                                DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
+                                OPEN skill_cur;
+                                    REPEAT
+                                        FETCH skill_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
+                                            INSERT INTO Similar_Skills_Table (FirstName, LastName, Major, ClassStanding, Bio) 
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio); 
+                                    UNTIL nested_exit_loop
+                                    END REPEAT;
+                                CLOSE skill_cur;
+                            END;
+
+                        ELSEIF (curr_pref = 'Major') THEN
+                            BEGIN
+
+                                DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
+                                DECLARE major_cur CURSOR FOR (
+                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    FROM User
+                                    WHERE Major IN (SELECT Major FROM User Where UserID = my_id) AND UserID <> my_id)
+                                    UNION
+                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    FROM User
+                                    WHERE Major = 'CE' AND UserID <> my_id)
+                                );
+                                DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
+                                OPEN major_cur;
+                                    REPEAT
+                                        FETCH major_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
+                                            INSERT INTO Similar_Major_Table (FirstName, LastName, Major, ClassStanding, Bio) 
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio); 
+                                    UNTIL nested_exit_loop
+                                    END REPEAT;
+                                CLOSE major_cur;
+                            END;
+
+                        ELSEIF (curr_pref = 'Class Standing') THEN
+                            BEGIN
+
+                                DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
+                                DECLARE class_cur CURSOR FOR (
+                                    SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    FROM User
+                                    WHERE UserID IN (SELECT Major FROM User Where UserID = my_id) AND UserID <> my_id
+                                );
+                                DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
+                                OPEN class_cur;
+                                    REPEAT
+                                        FETCH class_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
+                                            INSERT INTO Similar_ClassStanding_Table (FirstName, LastName, Major, ClassStanding, Bio) 
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio); 
+                                    UNTIL nested_exit_loop
+                                    END REPEAT;
+                                CLOSE class_cur;
+                            END;
+                        END IF;
+
+                    UNTIL exit_loop
+                    END REPEAT;
+                CLOSE prefs_cur;
+
+                (SELECT DISTINCT * FROM Similar_Skills_Table)
+                UNION
+                (SELECT DISTINCT * FROM Similar_Major_Table)
+                UNION
+                (SELECT DISTINCT * FROM Similar_ClassStanding_Table);
+
+            END
+            '''
+
+    cursor.callproc('Filter', [int(hashed_ID)])
+    # suggestions = []
+    for result in cursor.stored_results():
+        suggestions = (result.fetchall())
+
+    return jsonify(suggestions)
 
 @app.route("/getUserInfo", methods=['POST'])
 def getUserInfo():
