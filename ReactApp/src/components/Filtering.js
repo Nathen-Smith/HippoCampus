@@ -43,6 +43,43 @@ class Filtering extends React.Component {
     
   }
 
+  generateCards (num_cards, data) {
+    var views = [], cards = []
+    for (var i = 0; i < num_cards; i++) {
+      cards.push({index: i, text: data[i]})
+    }
+    cards.forEach(function(item) {
+      views.push(
+      <li key={item.index}>
+        {/* <Button className={styles.thick}
+          variant="outline-danger"
+          size="sm"
+          onClick={this.removeSkill.bind(null, item.index)}>
+          Remove
+          
+        </Button>{" "} */}
+        <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
+        <Card.Body>
+          <Card.Title>{this.state.likesData[item.index][0]+ ' '+ this.state.likesData[item.index][1]}</Card.Title>
+          <Card.Text>
+            {this.state.likesData[0][2]}
+            <br></br>
+            {this.state.likesData[0][3]}
+          </Card.Text>
+          <Button variant="danger">❤</Button>
+        </Card.Body>
+        </Card>     
+{/* 
+        <span className={styles.normal}>
+        {item.text}
+        </span> */}
+      </li>
+      );
+    }, this);
+    return views;
+  }
+
   render() {
     return (
       <div>
@@ -51,27 +88,32 @@ class Filtering extends React.Component {
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
          {this.state.success ==="t" && 
 
+            // <div>
+            // {/* look into the map function in js*/}
+            //     <h2>Users in the CS Major:</h2>
+
+            //     {/*NEED TO PUT THIS IN A FOR LOOP*/}
+
+            //     <Card style={{ width: '18rem' }}>
+            //       <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
+            //       <Card.Body>
+            //         <Card.Title>{this.state.likesData[0][0]+ ' '+ this.state.likesData[0][1]}</Card.Title>
+            //         <Card.Text>
+            //           {this.state.likesData[0][2]}
+            //           <br></br>
+            //           {this.state.likesData[0][3]}
+            //         </Card.Text>
+            //         <Button variant="danger">❤</Button>
+            //       </Card.Body>
+            //     </Card>     
+
+
+            // </div>
             <div>
-            {/* look into the map function in js*/}
-                <h2>Users in the CS Major:</h2>
-
-                {/*NEED TO PUT THIS IN A FOR LOOP*/}
-
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-                  <Card.Body>
-                    <Card.Title>{this.state.likesData[0][0]+ ' '+ this.state.likesData[0][1]}</Card.Title>
-                    <Card.Text>
-                      {this.state.likesData[0][2]}
-                      <br></br>
-                      {this.state.likesData[0][3]}
-                    </Card.Text>
-                    <Button variant="danger">❤</Button>
-                  </Card.Body>
-                </Card>     
-
-
-            </div>
+            <br/>
+              {this.generateCards(this.state.likesData.length, this.state.likesData)}
+            <br/>
+          </div>
          }
      
       </div>
