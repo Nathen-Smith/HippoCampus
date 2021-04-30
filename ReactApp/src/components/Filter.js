@@ -4,15 +4,18 @@ import Checkbox from "./Checkbox";
 const OPTIONS = ["Location", "Major", "Availability", "Class Standing", "Similar Skills"];
 
 class Filter extends Component {
-  state = {
-    checkboxes: OPTIONS.reduce(
-      (options, option) => ({
-        ...options,
-        [option]: false
-      }),
-      {}
-    )
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      checkboxes: OPTIONS.reduce(
+        (options, option) => ({
+          ...options,
+          [option]: false
+        }),
+      )
+    }
+  }
+  
 
   selectAllCheckboxes = isSelected => {
     Object.keys(this.state.checkboxes).forEach(checkbox => {
@@ -43,12 +46,37 @@ class Filter extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-
+    var selections = []
     Object.keys(this.state.checkboxes)
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
+        if (this.state.checkboxes[checkbox] === true) {
+          console.log(checkbox, "is selected.");
+          selections.push(checkbox)
+        }
       });
+
+      var data = {
+        "UserID": sessionStorage.getItem("UserID"),
+         "Preferences": selections
+      }
+      fetch('http://127.0.0.1:5000/updatePrefs', {
+        headers: {
+        "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        if (data !== "") {
+          // this.setState({success:"t", likesData: data})
+        } else {
+          // this.setState({success:"f"})
+        }
+      })
+      
   };
 
   createCheckbox = option => (
@@ -86,7 +114,7 @@ class Filter extends Component {
                 >
                   Deselect All
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" >
                   Save
                 </button>
               </div>

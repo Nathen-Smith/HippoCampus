@@ -91,7 +91,7 @@ def search():
     """ recieves post requests to add new task """
 
     data = request.get_json()
-
+    connection.reconnect()
     cursor = connection.cursor()
     test = 'Select Skill From Skills Where UserID = ' + _get_db_UserID(data["UserID"]) + ';'
     cursor.execute(test)
@@ -122,7 +122,7 @@ def filter():
     data = request.get_json()
 
     cursor = connection.cursor()
-    filterBy = "SELECT FirstName, LastName, ClassStanding, Major, Bio FROM User WHERE" + Major = 'CS'"
+    filterBy = "SELECT FirstName, LastName, ClassStanding, Major, Bio FROM User WHERE" + Major + " = CS;"
     cursor.execute(filterBy)
     result = cursor.fetchall()
     if len(result) == 0:
@@ -343,6 +343,28 @@ def autoFillDays():
 
     return jsonify(result)
 
+@app.route("/updatePrefs", methods=['POST'])
+def updatePrefs():
+    """ recieves post requests to add new task """
+    # connection.reconnect()
+    data = request.get_json()
+
+    # Preferences: UserID PK INT, Preference PK VARCHAR30, Rating INT
+    cursor = connection.cursor()
+    hashed_ID = _get_db_UserID(data["UserID"])
+    r = 'DELETE FROM Preferences WHERE UserID = ' + hashed_ID + ';'
+    cursor.execute(r)
+    for i in range(len(data["Preferences"])):
+        q = 'INSERT IGNORE INTO Preferences (UserID, Preference, Rating) VALUES (%s, %s, %s);'
+        cursor.execute(q, (hashed_ID, data["Preferences"][i], '5'))
+    
+    s = 'SELECT * FROM Preferences WHERE UserID = ' + hashed_ID + ';'
+    cursor = connection.cursor()
+
+    cursor.execute(s)
+    result = cursor.fetchall()
+    return jsonify(result)
+    
 # @app.route("/")
 # def homepage():
 #     """ returns rendered homepage """
