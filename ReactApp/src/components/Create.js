@@ -41,7 +41,7 @@ class Create extends React.Component {
         "Rating": this.state.Rating
       }
   
-      fetch('http://127.0.0.1:5000/create', {
+      fetch('https://hippocampus-309101.uc.r.appspot.com/create', {
         headers: {
           "Content-Type": "application/json"
         },

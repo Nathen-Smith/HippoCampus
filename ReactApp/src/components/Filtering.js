@@ -24,7 +24,7 @@ class Filtering extends React.Component {
       "Filter": sessionStorage.getItem("CurrentFilter")
     }
 
-    fetch('http://127.0.0.1:5000/filter', {
+    fetch('https://hippocampus-309101.uc.r.appspot.com/filter', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -100,7 +100,7 @@ class Filtering extends React.Component {
       "UserID": this.state.userID,
       "LikedID": this.state.likesData[i][5] 
     }
-    fetch('http://127.0.0.1:5000/addLike', {
+    fetch('https://hippocampus-309101.uc.r.appspot.com/addLike', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -111,7 +111,7 @@ class Filtering extends React.Component {
     .then((data) => {
       var data2 = {"UserID": this.state.userID}
       // console.log(data)
-      fetch('http://127.0.0.1:5000/search', {
+      fetch('https://hippocampus-309101.uc.r.appspot.com/search', {
       headers: {
         "Content-Type": "application/json"
       },

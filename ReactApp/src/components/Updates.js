@@ -58,7 +58,7 @@ class Updates extends React.Component {
       "Like5": this.state.id5
     }
 
-    fetch('http://127.0.0.1:5000/update', {
+    fetch('https://hippocampus-309101.uc.r.appspot.com/update', {
       headers: {
         "Content-Type": "application/json"
       },

@@ -29,7 +29,7 @@ function Login() {
           "name": res.profileObj.name
         }
         // console.log(data)
-        fetch('http://127.0.0.1:5000/findUser', {
+        fetch('https://hippocampus-309101.uc.r.appspot.com/findUser', {
           headers: {
             "Content-Type": "application/json"
           },
@@ -56,7 +56,7 @@ function Login() {
             "UserID": res.profileObj.googleId,
           }
           // console.log(data)
-          fetch('http://127.0.0.1:5000/autoFillDays', {
+          fetch('https://hippocampus-309101.uc.r.appspot.com/autoFillDays', {
             headers: {
               "Content-Type": "application/json"
             },
