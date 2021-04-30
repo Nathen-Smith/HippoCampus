@@ -46,7 +46,9 @@ class Filtering extends React.Component {
   generateCards (num_cards, data) {
     var views = [], cards = []
     for (var i = 0; i < num_cards; i++) {
-      cards.push({index: i, text: data[i]})
+      if (data[i][0] != null && data[i][1] != null) {
+        cards.push({index: i, text: data[i]})
+      }
     }
     cards.forEach(function(item) {
       views.push(
