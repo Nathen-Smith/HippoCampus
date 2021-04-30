@@ -28,8 +28,8 @@ class SearchView extends React.Component {
     buttons.forEach(function(item) {
       views.push(
       <li key={item.index}>
-        <Button className={styles.thick}
-          variant="outline-danger"
+        <Button
+          variant="danger"
           size="sm"
           onClick={this.removeSkill.bind(null, item.index)}>
           Remove
