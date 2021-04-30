@@ -122,7 +122,7 @@ def filter():
     data = request.get_json()
 
     cursor = connection.cursor()
-    filterBy = "SELECT FirstName, LastName, ClassStanding, Major, Bio FROM User WHERE" + Major = 'CS'"
+    filterBy = "SELECT FirstName, LastName, ClassStanding, Major, Bio FROM User WHERE Major = 'CS';"
     cursor.execute(filterBy)
     result = cursor.fetchall()
     if len(result) == 0:
