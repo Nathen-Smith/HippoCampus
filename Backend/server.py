@@ -305,7 +305,7 @@ def addLike():
 
     cursor.execute(like, (_get_db_UserID(data["UserID"]), str(data["LikedID"])))
 
-    s = 'SELECT * FROM Likes WHERE UserID = ' + _get_db_UserID(data["UserID"]) + ';'
+    s = 'SELECT * FROM Likes WHERE UserID = ' + _get_db_UserID(data["UserID"]) + ";"
     cursor.execute(s)
     res = cursor.fetchall()
     connection.commit()

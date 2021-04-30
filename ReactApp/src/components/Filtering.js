@@ -96,7 +96,7 @@ class Filtering extends React.Component {
     alert("You have liked a User (>‿◠)✌")
     var data =  {
       "UserID": this.state.userID,
-      "LikedID": this.state.likesData[0][5] 
+      "LikedID": this.state.likesData[i][5] 
     }
     fetch('http://127.0.0.1:5000/addLike', {
       headers: {
@@ -120,7 +120,7 @@ class Filtering extends React.Component {
     .then((data) => {
       console.log(data)
       if (data !== "") {
-          this.setState({success:"t", likesData: data})
+          this.setState({success:"t"})
       } else {
           this.setState({success:"f"})
       }
