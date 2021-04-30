@@ -168,7 +168,7 @@ def filter():
                             BEGIN
                                 DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
                                 DECLARE skill_cur CURSOR FOR (
-                                    SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    SELECT FirstName, LastName, ClassStanding, Major, Bio
                                     FROM Skills NATURAL JOIN User
                                     WHERE Skill IN (
                                         SELECT Skill FROM Skills WHERE UserID = my_id ORDER BY Rating DESC
@@ -178,8 +178,8 @@ def filter():
                                 OPEN skill_cur;
                                     REPEAT
                                         FETCH skill_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
-                                            INSERT INTO Similar_Skills_Table (FirstName, LastName, Major, ClassStanding, Bio) 
-                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio); 
+                                            INSERT INTO Similar_Skills_Table (FirstName, LastName, Major, ClassStanding, Bio)
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio);
                                     UNTIL nested_exit_loop
                                     END REPEAT;
                                 CLOSE skill_cur;
@@ -188,11 +188,11 @@ def filter():
                             BEGIN
                                 DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
                                 DECLARE major_cur CURSOR FOR (
-                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio
                                     FROM User
                                     WHERE Major IN (SELECT Major FROM User Where UserID = my_id) AND UserID <> my_id)
                                     UNION
-                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio
                                     FROM User
                                     WHERE Major = 'CE' AND UserID <> my_id)
                                 );
@@ -200,8 +200,8 @@ def filter():
                                 OPEN major_cur;
                                     REPEAT
                                         FETCH major_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
-                                            INSERT INTO Similar_Major_Table (FirstName, LastName, Major, ClassStanding, Bio) 
-                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio); 
+                                            INSERT INTO Similar_Major_Table (FirstName, LastName, Major, ClassStanding, Bio)
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio);
                                     UNTIL nested_exit_loop
                                     END REPEAT;
                                 CLOSE major_cur;
@@ -210,7 +210,7 @@ def filter():
                             BEGIN
                                 DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
                                 DECLARE class_cur CURSOR FOR (
-                                    SELECT FirstName, LastName, ClassStanding, Major, Bio 
+                                    SELECT FirstName, LastName, ClassStanding, Major, Bio
                                     FROM User
                                     WHERE ClassStanding IN (SELECT ClassStanding FROM User Where UserID = my_id) AND UserID <> my_id
                                 );
@@ -218,8 +218,8 @@ def filter():
                                 OPEN class_cur;
                                     REPEAT
                                         FETCH class_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
-                                            INSERT INTO Similar_ClassStanding_Table (FirstName, LastName, Major, ClassStanding, Bio) 
-                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio); 
+                                            INSERT INTO Similar_ClassStanding_Table (FirstName, LastName, Major, ClassStanding, Bio)
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio);
                                     UNTIL nested_exit_loop
                                     END REPEAT;
                                 CLOSE class_cur;
@@ -258,7 +258,7 @@ def getUserInfo():
     if len(result) == 0:
         return jsonify([])
 
-    return jsonify(result)   
+    return jsonify(result)
 
 @app.route("/findUser", methods=['POST'])
 def findUser():
@@ -297,7 +297,7 @@ def addLike():
     cursor = connection.cursor()
     data = request.get_json()
 
-    like = "REPLACE INTO Likes (UserID, LikedUserID) VALUES (%s, %s);"   
+    like = "REPLACE INTO Likes (UserID, LikedUserID) VALUES (%s, %s);"
 
     cursor.execute(like, (_get_db_UserID(data["UserID"]), str(data["LikedID"])))
 
@@ -330,7 +330,7 @@ def deletePerson():
     hashed_ID = _get_db_UserID(data["UserID"])
     deleting_ID = str(data["personUserID"])
     print(deleting_ID)
-    delete = "DELETE FROM Likes WHERE UserID = " + hashed_ID + ", LikedUserID = " + str(data["personUserID"]) + ";"
+    delete = "DELETE FROM Likes WHERE UserID = " + hashed_ID + " AND LikedUserID = " + str(data["personUserID"]) + ";"
     # delete_query_like = '''  update Likes
     #                     set Like1 = IF(Like1 = ''' + deleting_ID + ''', null, Like1)
     #                     where UserId = ''' + hashed_ID + '''; '''
@@ -385,7 +385,7 @@ def searchMatches():
 
 @app.route("/updateAvailability", methods=['POST'])
 def updateAvailability():
-    """ recieves post requests to add new task """    
+    """ recieves post requests to add new task """
 
     data = request.get_json()
 
@@ -424,7 +424,7 @@ def updateUser():
     update_user = 'REPLACE INTO User (UserID, Age, ClassStanding, FirstName, LastName, Location, Major, Minor, Bio, Statement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
     cursor = connection.cursor()
     cursor.execute(update_user, (hashed_ID, data['Age'], data['ClassStanding'], data['FirstName'], data["LastName"], data["Location"], data["Major"], data["Minor"], data["Bio"], data["Statement"]))
- 
+
     connection.commit()
     connection.reconnect()
     #result = {'success': True, 'response': 'Done'}
@@ -433,7 +433,7 @@ def updateUser():
     test = 'Select * From User Where UserID = ' + hashed_ID + ';'
     cursor.execute(test)
     result = cursor.fetchall()
-    
+
     return jsonify(result)
 
 @app.route("/autoFillDays", methods=['POST'])
@@ -472,7 +472,7 @@ def updatePrefs():
     for i in range(len(data["Preferences"])):
         q = 'INSERT IGNORE INTO Preferences (UserID, Preference) VALUES (%s, %s);'
         cursor.execute(q, (hashed_ID, data["Preferences"][i]))
-    
+
     s = 'SELECT * FROM Preferences WHERE UserID = ' + hashed_ID + ';'
     cursor = connection.cursor()
 
@@ -480,7 +480,7 @@ def updatePrefs():
     result = cursor.fetchall()
     connection.commit()
     return jsonify(result)
-    
+
 # @app.route("/")
 # def homepage():
 #     """ returns rendered homepage """
