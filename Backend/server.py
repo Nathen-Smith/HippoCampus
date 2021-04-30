@@ -12,8 +12,15 @@ dbIP = '35.238.147.89'
 dbUser = "root"
 dbPass = "b49NteBOf7k5gar3"
 dbName = 'HippoCampus'
+cloud_sql_connection_name = "hippocampus-309101:us-central1:hippocampus2"
+db_socket_dir = "/cloudsql"
 
-connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPass, database = dbName, port = 3306)
+
+connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPass, database = dbName, port = 3306, query={
+            "unix_socket": "{}/{}".format(
+                db_socket_dir,  # e.g. "/cloudsql"
+                cloud_sql_connection_name)  # i.e "<PROJECT-NAME>:<INSTANCE-REGION>:<INSTANCE-NAME>"
+        })
 SQL_MAX_NUM = 2147483647
 
 def _get_db_UserID(google_Id):
