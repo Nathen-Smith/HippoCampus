@@ -8,7 +8,7 @@ from mysql.connector import Error
 app = Flask(__name__)
 CORS(app)
 
-dbIP = '89.147.238.35.bc.googleusercontent.com'
+dbIP = '35.238.147.89'
 dbUser = "root"
 dbPass = "b49NteBOf7k5gar3"
 dbName = 'HippoCampus'
