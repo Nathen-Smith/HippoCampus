@@ -2,6 +2,9 @@ runtime: python # or another supported version
 env: flex
 beta_settings:
   cloud_sql_instances: hippocampus-309101:us-central1:hippocampus2
+
+entrypoint: python server.py
+
 resources:
     cpu: 1
     memory_gb: 2
