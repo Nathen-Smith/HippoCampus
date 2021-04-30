@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, redirect, jsonify)
 from flask_cors import CORS
 import mysql.connector, atexit, csv
 from mysql.connector import Error
-import numpy as np
+#import numpy as np
 
 
 app = Flask(__name__)
