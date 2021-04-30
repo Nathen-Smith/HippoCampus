@@ -15,8 +15,9 @@ export default function Home() {
                     {/* <h1>HippoCampus</h1> */}
                     {/* <p className="text-muted">Logged in!</p> */}
                     {/* <SearchView></SearchView><br /> */}
+                    <img src="https://www.logocowboy.com/wp-content/uploads/2015/12/fatgeek3.png" width="250" height="200" alt="Mascot"></img>
                     <LinkContainer to="/edit">
-                <Nav.Link >Edit</Nav.Link>
+                <Nav.Link >Edit Profile</Nav.Link>
 
               </LinkContainer>
               <LinkContainer to="/find">
@@ -26,7 +27,7 @@ export default function Home() {
 
               <LinkContainer to = "/matches">
                 <Nav.Link>Matches</Nav.Link>
-                
+                 
               </LinkContainer>
 
                 </div>

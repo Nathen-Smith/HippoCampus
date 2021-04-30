@@ -1,30 +1,29 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
+import Box from '@material-ui/core/Box';
 import '../App.css'
 
 class Edit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        "Age" : -1,
-        "ClassStanding" : '',
-        "Location" : '',
-        "Major" : '',
-        "Minor" : '',
-        "Bio" : '',
-        "Statement" : '',
-        "Available on Monday": -1,
-        "Available on Tuesday": -1,
-        "Available on Wednesday": -1,
-        "Available on Thursday": -1,
-        "Available on Friday": -1,
-        "Available on Saturday": -1,
-        "Available on Sunday": -1
-
-    }
-    
+        Age : sessionStorage.getItem('Age'),
+        ClassStanding : sessionStorage.getItem('ClassStanding'),
+        Location : sessionStorage.getItem('Location'),
+        Major : sessionStorage.getItem('Major'),
+        Minor : sessionStorage.getItem('Minor'),
+        Bio : sessionStorage.getItem('Bio'),
+        Statement : sessionStorage.getItem('Statement'),
+        AvailableOnMonday: sessionStorage.getItem('AvailableOnMonday'),
+        AvailableOnTuesday: sessionStorage.getItem('AvailableOnTuesday'),
+        AvailableOnWednesday: sessionStorage.getItem('AvailableOnWednesday'),
+        AvailableOnThursday: sessionStorage.getItem('AvailableOnThursday'),
+        AvailableOnFriday: sessionStorage.getItem('AvailableOnFriday'),
+        AvailableOnSaturday: sessionStorage.getItem('AvailableOnSaturday'),
+        AvailableOnSunday: sessionStorage.getItem('AvailableOnSunday')
   }
+}
 
   changeAge = (e) => {
     this.setState({Age: e.target.value})
@@ -82,26 +81,20 @@ class Edit extends React.Component {
     this.setState({AvailableOnSunday: e.target.value})
   }
 
-
-  updateInfo = () => {
+  updateAvailability = () => {
     var data =  {
-        "Age" : -1,
-        "ClassStanding" : '',
-        "Location" : '',
-        "Major" : '',
-        "Minor" : '',
-        "Bio" : '',
-        "Statement" : '',
-        "AvailableOnMonday": -1,
-        "AvailableOnTuesday": -1,
-        "AvailableOnWednesday": -1,
-        "AvailableOnThursday": -1,
-        "AvailableOnFriday": -1,
-        "AvailableOnSaturday": -1,
-        "AvailableOnSunday": -1
+      UserID: sessionStorage.getItem("UserID"),
+      Monday : this.state.AvailableOnMonday,
+      Tuesday : this.state.AvailableOnTuesday,
+      Wednesday : this.state.AvailableOnWednesday,
+      Thursday : this.state.AvailableOnThursday,
+      Friday : this.state.AvailableOnFriday,
+      Saturday : this.state.AvailableOnSaturday,
+      Sunday : this.state.AvailableOnSunday
     }
+    // console.log(data)
 
-    fetch('http://127.0.0.1:5000/update', {
+    fetch('http://127.0.0.1:5000/updateAvailability', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -111,9 +104,58 @@ class Edit extends React.Component {
     .then(response => response.text())
     .then((data) => {
       console.log(data)
+      var data_arr = JSON.parse(data)
+      // console.log(data_arr)
+      
+      sessionStorage.setItem('AvailableOnMonday', data_arr[0][1])
+      sessionStorage.setItem('AvailableOnTuesday', data_arr[0][2])
+      sessionStorage.setItem('AvailableOnWednesday', data_arr[0][3])
+      sessionStorage.setItem('AvailableOnThursday', data_arr[0][4])
+      sessionStorage.setItem('AvailableOnFriday', data_arr[0][5])
+      sessionStorage.setItem('AvailableOnSaturday', data_arr[0][6])
+      sessionStorage.setItem('AvailableOnSunday', data_arr[0][7])
     })
     
   }
+
+
+  updateUser = () => {
+    var name = sessionStorage.getItem("name").split(" ")
+    var data =  {
+        UserID: sessionStorage.getItem("UserID"),
+        Age : this.state.Age,
+        ClassStanding : this.state.ClassStanding,
+        FirstName : name[0],
+        LastName : name[1],
+        Location : this.state.Location,
+        Major : this.state.Major,
+        Minor : this.state.Minor,
+        Bio : this.state.Bio,
+        Statement : this.state.Statement
+    }
+
+    fetch('http://127.0.0.1:5000/updateUser', {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then((data) => {
+      console.log(data)
+      var data_arr = JSON.parse(data)
+      sessionStorage.setItem('Age', data_arr[0][1])
+      sessionStorage.setItem('ClassStanding', data_arr[0][2])
+      sessionStorage.setItem('Location', data_arr[0][5])
+      sessionStorage.setItem('Major', data_arr[0][6])
+      sessionStorage.setItem('Minor', data_arr[0][7])
+      sessionStorage.setItem('Bio', data_arr[0][8])
+      sessionStorage.setItem('Statement', data_arr[0][9])
+    })
+    
+  }
+
 
   render() {
     // console.log(this.state.id1)
@@ -122,50 +164,55 @@ class Edit extends React.Component {
     // console.log(this.state.id4)
     // console.log(this.state.id5)
     return (
-      <div>
-        <h1>Update Info</h1>
-        <h2>Age</h2>
-        <input
-            type="text"
-            onChange={this.changeAge}
-            value = {this.state.Age}
-         />
-        <h2>Class Standing</h2>
-        <input
-            type="text"
-            onChange={this.changeClassStanding}
-            value = {this.state.ClassStanding}
-         />
-         <h2>Location</h2>
-        <input
-            type="text"
-            onChange={this.changeLocation}
-            value = {this.state.Location}
-         />
-         <h2>Major</h2>
-        <input
-            type="text"
-            onChange={this.changeMajor}
-            value = {this.state.Major}
-         />
-         <h2>Minor</h2>
-        <input
-            type="text"
-            onChange={this.changeMinor}
-            value = {this.state.Minor}
-         />
-         <h2>Bio</h2>
-        <input
-            type="text"
-            onChange={this.changeBio}
-            value={this.state.Bio}
-         />
-         <h2>Statement</h2>
-        <input
-            type="text"
-            onChange={this.changeStatement}
-            value={this.state.Statement}
-         />
+      <div className="row mt-5">
+        <Box color="white" bgcolor="DarkOliveGreen" p={1}>
+          <h1>Update Your Profile</h1>
+          <h2>Age</h2>
+          <input
+              type="text"
+              onChange={this.changeAge}
+              value = {this.state.Age}
+          />
+          <h2>Class Standing</h2>
+          <input
+              type="text"
+              onChange={this.changeClassStanding}
+              value = {this.state.ClassStanding}
+          />
+          <h2>Location</h2>
+          <input
+              type="text"
+              onChange={this.changeLocation}
+              value = {this.state.Location}
+          />
+          <h2>Major</h2>
+          <input
+              type="text"
+              onChange={this.changeMajor}
+              value = {this.state.Major}
+          />
+          <h2>Minor</h2>
+          <input
+              type="text"
+              onChange={this.changeMinor}
+              value = {this.state.Minor}
+          />
+          <h2>Bio</h2>
+          <input
+              type="text"
+              onChange={this.changeBio}
+              value={this.state.Bio}
+          />
+          <h2>Statement</h2>
+          <input
+              type="text"
+              onChange={this.changeStatement}
+              value={this.state.Statement}
+          />
+          <button onClick={this.updateUser}>Update User Info</button>
+        </Box>
+        <Box color="black" bgcolor="DarkKhaki" p={1}>
+        <h1>Update Your Availability</h1>
         <h2>Available on Monday</h2>
         <input
             type="text"
@@ -208,8 +255,8 @@ class Edit extends React.Component {
             onChange={this.changeSunday}
             value={this.state.AvailableOnSunday}
          />
-         <button onClick={this.updateInfo}>Update Info</button>
-        
+         <button onClick={this.updateAvailability}>Update Availability</button>
+         </Box>  
      
       </div>
 

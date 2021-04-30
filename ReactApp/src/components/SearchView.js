@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
 import {Button} from 'react-bootstrap'
+import Box from '@material-ui/core/Box';
 import styles from './SearchView.module.css';
 // import { Link } from 'react-router-dom'
 
@@ -27,9 +28,9 @@ class SearchView extends React.Component {
     buttons.forEach(function(item) {
       views.push(
       <li key={item.index}>
-        <Button className={styles.thick}
-          variant="outline-danger" 
-          size="sm" 
+        <Button
+          variant="danger"
+          size="sm"
           onClick={this.removeSkill.bind(null, item.index)}>
           Remove
         </Button>{" "}
@@ -78,14 +79,14 @@ class SearchView extends React.Component {
       }
     })
     })
-    
+
   }}
-  
+
 
   changeUserID = (e) => {
       this.setState({userID: e.target.value})
   }
-  
+
 
   searchLikes = () => {
     var data =  {
@@ -108,19 +109,20 @@ class SearchView extends React.Component {
           this.setState({success:"f"})
       }
     })
-    
+
   }
   // end = () => {
   //   this.setState({success:"f"})
   // }
-  
+
 
   render() {
     // for (var i = 0; i < this.state.likesData.length; i++  ) {
     //   perskill.push(<button>PLS</button>)
     // }
     return (
-      <div>
+      <div className="row mt-5">
+        <Box color="black" bgcolor="DarkSeaGreen" p={1}>
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
         <h1>Edit Skills</h1>
@@ -129,17 +131,18 @@ class SearchView extends React.Component {
                   Click Me!
             </Button>
         </Link> */}
-         <Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
+         <Button variant="secondary" onClick={this.searchLikes}>Show Skills</Button>
          {/* <text>{"\n"}</text> */}
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
-         {this.state.success ==="t" && 
+         {this.state.success ==="t" &&
             <div>
               <br/>
               {this.renderButtons(this.state.likesData.length, this.state.likesData)}
               <br/>
             </div>
-            
+
          }
+         </Box>
       </div>
 
     )
