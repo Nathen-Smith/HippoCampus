@@ -369,11 +369,8 @@ def searchMatches():
     hashed_ID = _get_db_UserID(data['UserID'])
     print(hashed_ID)
     # hashed_ID = "1" # this is temporary remove when done w testing
-    findLikes =     '''select FirstName, LastName, Major, ClassStanding, UserId
-                    from User
-                    where UserId = (select LikedUserID
-                    				from User u NATURAL JOIN Likes l
-                    				where u.UserId =''' + hashed_ID + ''');'''
+    findLikes =    '''select u.FirstName, u.LastName, u.Major, u.ClassStanding, u.UserID
+                    from User u JOIN (select LikedUserID from Likes l where l.UserID = ''' + hashed_ID + ''') as l on u.UserID = l.LikedUserID;'''
 
     cursor.execute(findLikes)
     result = cursor.fetchall()
