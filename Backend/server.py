@@ -13,7 +13,7 @@ dbUser = "root"
 dbPass = "b49NteBOf7k5gar3"
 dbName = 'HippoCampus'
 
-connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPass, database = dbName)
+connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPass, database = dbName, port = 3306)
 SQL_MAX_NUM = 2147483647
 
 def _get_db_UserID(google_Id):
