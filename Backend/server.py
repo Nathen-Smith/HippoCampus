@@ -134,6 +134,7 @@ def filter():
                 DECLARE curr_ClassStanding VARCHAR(20);
                 DECLARE curr_Bio VARCHAR(300);
                 DECLARE curr_pref VARCHAR(30);
+                DECLARE curr_UserID INT;
                 DECLARE exit_loop BOOLEAN DEFAULT FALSE;
                 DECLARE prefs_cur CURSOR FOR (SELECT Preference FROM Preferences WHERE UserID = my_id);
                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET exit_loop = TRUE;
@@ -145,21 +146,24 @@ def filter():
                     LastName VARCHAR(30),
                     Major VARCHAR(20),
                     ClassStanding VARCHAR(20),
-                    Bio VARCHAR(300)
+                    Bio VARCHAR(300),
+                    UserID INT
                 );
                 CREATE TABLE Similar_Major_Table (
                     FirstName VARCHAR(30),
                     LastName VARCHAR(30),
                     Major VARCHAR(20),
                     ClassStanding VARCHAR(20),
-                    Bio VARCHAR(300)
+                    Bio VARCHAR(300),
+                    UserID INT
                 );
                 CREATE TABLE Similar_ClassStanding_Table (
                     FirstName VARCHAR(30),
                     LastName VARCHAR(30),
                     Major VARCHAR(20),
                     ClassStanding VARCHAR(20),
-                    Bio VARCHAR(300)
+                    Bio VARCHAR(300),
+                    UserID INT
                 );
                 OPEN prefs_cur;
                     REPEAT
@@ -168,7 +172,7 @@ def filter():
                             BEGIN
                                 DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
                                 DECLARE skill_cur CURSOR FOR (
-                                    SELECT FirstName, LastName, ClassStanding, Major, Bio
+                                    SELECT FirstName, LastName, ClassStanding, Major, Bio, UserID
                                     FROM Skills NATURAL JOIN User
                                     WHERE Skill IN (
                                         SELECT Skill FROM Skills WHERE UserID = my_id ORDER BY Rating DESC
@@ -177,9 +181,9 @@ def filter():
                                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
                                 OPEN skill_cur;
                                     REPEAT
-                                        FETCH skill_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
-                                            INSERT INTO Similar_Skills_Table (FirstName, LastName, Major, ClassStanding, Bio)
-                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio);
+                                        FETCH skill_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio, curr_UserID;
+                                            INSERT INTO Similar_Skills_Table (FirstName, LastName, Major, ClassStanding, Bio, UserID)
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio, curr_UserID);
                                     UNTIL nested_exit_loop
                                     END REPEAT;
                                 CLOSE skill_cur;
@@ -188,20 +192,20 @@ def filter():
                             BEGIN
                                 DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
                                 DECLARE major_cur CURSOR FOR (
-                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio
+                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio, UserID
                                     FROM User
                                     WHERE Major IN (SELECT Major FROM User Where UserID = my_id) AND UserID <> my_id)
                                     UNION
-                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio
+                                    (SELECT FirstName, LastName, ClassStanding, Major, Bio, UserID
                                     FROM User
                                     WHERE Major = 'CE' AND UserID <> my_id)
                                 );
                                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
                                 OPEN major_cur;
                                     REPEAT
-                                        FETCH major_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
-                                            INSERT INTO Similar_Major_Table (FirstName, LastName, Major, ClassStanding, Bio)
-                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio);
+                                        FETCH major_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio, curr_UserID;
+                                            INSERT INTO Similar_Major_Table (FirstName, LastName, Major, ClassStanding, Bio, UserID)
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio, curr_UserID);
                                     UNTIL nested_exit_loop
                                     END REPEAT;
                                 CLOSE major_cur;
@@ -210,16 +214,16 @@ def filter():
                             BEGIN
                                 DECLARE nested_exit_loop BOOLEAN DEFAULT FALSE;
                                 DECLARE class_cur CURSOR FOR (
-                                    SELECT FirstName, LastName, ClassStanding, Major, Bio
+                                    SELECT FirstName, LastName, ClassStanding, Major, Bio, UserID
                                     FROM User
                                     WHERE ClassStanding IN (SELECT ClassStanding FROM User Where UserID = my_id) AND UserID <> my_id
                                 );
                                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
                                 OPEN class_cur;
                                     REPEAT
-                                        FETCH class_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio;
-                                            INSERT INTO Similar_ClassStanding_Table (FirstName, LastName, Major, ClassStanding, Bio)
-                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio);
+                                        FETCH class_cur INTO curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio, curr_UserID;
+                                            INSERT INTO Similar_ClassStanding_Table (FirstName, LastName, Major, ClassStanding, Bio, UserID)
+                                            VALUES (curr_FirstName, curr_LastName, curr_Major, curr_ClassStanding, curr_Bio, curr_UserID);
                                     UNTIL nested_exit_loop
                                     END REPEAT;
                                 CLOSE class_cur;
@@ -236,7 +240,7 @@ def filter():
             END
             '''
 
-    cursor.callproc('Filter', [int(hashed_ID)])
+    cursor.callproc('new_procedure', [int(hashed_ID)])
     # suggestions = []
     for result in cursor.stored_results():
         suggestions = (result.fetchall())

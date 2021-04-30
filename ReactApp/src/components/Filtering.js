@@ -78,8 +78,8 @@ class Filtering extends React.Component {
           <Card.Text>
           {this.state.likesData[0][2]}
           </Card.Text>
-          {/* <Button variant="danger" onClick={this.likedUser.bind(null, item.index)}>❤</Button> */}
-          <Button variant="danger">❤</Button>
+          <Button variant="danger" onClick={this.likedUser.bind(null, item.index)}>❤</Button>
+          {/* <Button variant="danger">❤</Button> */}
         </Card.Body>
       </Card>     
 {/* 
@@ -92,42 +92,42 @@ class Filtering extends React.Component {
     return views;
   }
   
-  // likedUser = (i) => {
-  //   alert("You have liked a User (>‿◠)✌")
-  //   var data =  {
-  //     "UserID": this.state.userID,
-  //     "LikedID": this.state.likesData[0][6] 
-  //   }
-  //   fetch('http://127.0.0.1:5000/addLike', {
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify(data)
-  //   })
-  //   .then(response => response.json())
-  //   .then((data) => {
-  //     var data2 = {"UserID": this.state.userID}
-  //     // console.log(data)
-  //     fetch('http://127.0.0.1:5000/search', {
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify(data2)
-  //   })
-  //   .then(response => response.json())
-  //   .then((data) => {
-  //     console.log(data)
-  //     if (data !== "") {
-  //         this.setState({success:"t", likesData: data})
-  //     } else {
-  //         this.setState({success:"f"})
-  //     }
-  //   })
-  //   })
+  likedUser = (i) => {
+    alert("You have liked a User (>‿◠)✌")
+    var data =  {
+      "UserID": this.state.userID,
+      "LikedID": this.state.likesData[0][5] 
+    }
+    fetch('http://127.0.0.1:5000/addLike', {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then((data) => {
+      var data2 = {"UserID": this.state.userID}
+      // console.log(data)
+      fetch('http://127.0.0.1:5000/search', {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(data2)
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+      if (data !== "") {
+          this.setState({success:"t", likesData: data})
+      } else {
+          this.setState({success:"f"})
+      }
+    })
+    })
     
-  // }
+  }
 
   render() {
     return (
