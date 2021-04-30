@@ -476,21 +476,29 @@ def updatePrefs():
     """ recieves post requests to add new task """
     # connection.reconnect()
     data = request.get_json()
-
-    # Preferences: UserID PK INT, Preference PK VARCHAR30, Rating INT
     cursor = connection.cursor()
+
+    # d = 'DROP TABLE IF EXISTS Preferences;'
+    # cursor.execute(d)
+    # connection.commit()
+    # return(jsonify('ok'))
+
+    # p = 'CREATE TABLE Preferences(UserID INTEGER NOT NULL, Preference VARCHAR(30) NOT NULL, FOREIGN KEY(UserID) References User(UserID) ON DELETE CASCADE, PRIMARY KEY(UserID, Preference) );'
+    # cursor.execute(p)
+    # Preferences: UserID INT, Preference VARCHAR30, Rating INT, PK(UserID, Preference)
     hashed_ID = _get_db_UserID(data["UserID"])
     r = 'DELETE FROM Preferences WHERE UserID = ' + hashed_ID + ';'
     cursor.execute(r)
     for i in range(len(data["Preferences"])):
-        q = 'INSERT IGNORE INTO Preferences (UserID, Preference, Rating) VALUES (%s, %s, %s);'
-        cursor.execute(q, (hashed_ID, data["Preferences"][i], '5'))
+        q = 'INSERT IGNORE INTO Preferences (UserID, Preference) VALUES (%s, %s);'
+        cursor.execute(q, (hashed_ID, data["Preferences"][i]))
     
     s = 'SELECT * FROM Preferences WHERE UserID = ' + hashed_ID + ';'
     cursor = connection.cursor()
 
     cursor.execute(s)
     result = cursor.fetchall()
+    connection.commit()
     return jsonify(result)
     
 # @app.route("/")
