@@ -122,6 +122,7 @@ class SearchView extends React.Component {
     // }
     return (
       <div className="row mt-5">
+        <div className="col-sm-10">
         <Box color="black" bgcolor="DarkSeaGreen" p={1}>
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
@@ -144,7 +145,7 @@ class SearchView extends React.Component {
          }
          </Box>
       </div>
-
+      </div>
     )
   }
 }

@@ -62,7 +62,8 @@ class Create extends React.Component {
       // console.log(this.state.id4)
       // console.log(this.state.id5)
       return (
-        <div className="row mt-1">
+        <div className="row mt-5">
+          <div className="col-sm-10">
           <Box color="black" bgcolor="DarkSeaGreen" p={1}> 
           <h1>Insert Skill</h1>  
 
@@ -88,6 +89,7 @@ class Create extends React.Component {
            <button onClick={this.insertLikes}>Insert Skill</button>
           
         </Box>
+        </div>
         </div>
   
       )

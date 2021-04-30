@@ -9,9 +9,7 @@ import MatchesTab from "./containers/MatchesTab"
 import CardsTab from "./containers/CardsTab"
 
 import Edit from "./containers/Edit"
-import SearchView from "./components/SearchView"
-import Create from "./components/Create"
-import Filter from "./components/Filter"
+
 
 
 // import AuthenticatedRoute from "./components/AuthenticatedRoute";
@@ -24,7 +22,7 @@ export default function Routes() {
     <Switch>
       <Route exact path="/"><Home /></Route>
       <Route exact path="/login"><Login /> </Route>
-      <Route exact path="/edit"><Edit /> <SearchView/><Create/><Filter/></Route>
+      <Route exact path="/edit"><Edit /> </Route>
         {/* <Redirect to="/user" /> */}
       <Route exact path="/logout"><Logout /></Route>
       <Route exact path="/matches"><MatchesTab /></Route>

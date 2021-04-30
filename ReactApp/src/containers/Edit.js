@@ -4,6 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Box from '@material-ui/core/Box';
 import '../App.css'
 
+import SearchView from "../components/SearchView"
+import Create from "../components/Create"
+import Filter from "../components/Filter"
+
 class Edit extends React.Component {
   constructor(props) {
     super(props);
@@ -164,7 +168,9 @@ class Edit extends React.Component {
     // console.log(this.state.id4)
     // console.log(this.state.id5)
     return (
-      <div className="row mt-5">
+      <div>
+      <div className="row mt-20">
+        {/* <div className="col-sm-5"> */}
         <Box color="white" bgcolor="DarkOliveGreen" p={1}>
           <h1>Update Your Profile</h1>
           <h2>Age</h2>
@@ -256,10 +262,15 @@ class Edit extends React.Component {
             value={this.state.AvailableOnSunday}
          />
          <button onClick={this.updateAvailability}>Update Availability</button>
-         </Box>  
-     
-      </div>
+         </Box> 
 
+      </div>
+      <div className="row mt-5">
+        <SearchView></SearchView>
+         <Create></Create>
+         <Filter></Filter> 
+      </div>
+      </div>
     )
   }
 }

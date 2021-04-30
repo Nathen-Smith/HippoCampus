@@ -11,7 +11,7 @@ export default function Home() {
         return (
             <div className="Home">
                 <div className="lander">
-                    <h1>Welcome, {name}</h1>
+                    <h1>Welcome, {name}!</h1>
                     {/* <h1>HippoCampus</h1> */}
                     {/* <p className="text-muted">Logged in!</p> */}
                     {/* <SearchView></SearchView><br /> */}
