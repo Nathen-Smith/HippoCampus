@@ -1,7 +1,7 @@
  import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 
-const OPTIONS = ["Location", "Major", "Availability", "Class Standing", "Similar Skills"];
+const OPTIONS = ["Major", "Class Standing", "Similar Skills"];
 
 class Filter extends Component {
   constructor(props) {

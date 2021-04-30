@@ -212,7 +212,7 @@ def filter():
                                 DECLARE class_cur CURSOR FOR (
                                     SELECT FirstName, LastName, ClassStanding, Major, Bio 
                                     FROM User
-                                    WHERE UserID IN (SELECT Major FROM User Where UserID = my_id) AND UserID <> my_id
+                                    WHERE ClassStanding IN (SELECT ClassStanding FROM User Where UserID = my_id) AND UserID <> my_id
                                 );
                                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET nested_exit_loop = TRUE;
                                 OPEN class_cur;

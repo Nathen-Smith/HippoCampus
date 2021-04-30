@@ -8,7 +8,7 @@ class Filtering extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userID: "",
+      userID: sessionStorage.getItem("UserID"),
       success: "",
       likesData: []
     }
