@@ -94,7 +94,7 @@ class Edit extends React.Component {
     }
     // console.log(data)
 
-    fetch('https://hippocampus-309101.uc.r.appspot.com/updateAvailability', {
+    fetch('https://127.0.0.1/updateAvailability', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -134,7 +134,7 @@ class Edit extends React.Component {
         Statement : this.state.Statement
     }
 
-    fetch('https://hippocampus-309101.uc.r.appspot.com/updateUser', {
+    fetch('https://127.0.0.1/updateUser', {
       headers: {
         "Content-Type": "application/json"
       },

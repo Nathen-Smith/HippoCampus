@@ -60,7 +60,7 @@ class Filter extends Component {
         "UserID": sessionStorage.getItem("UserID"),
          "Preferences": selections
       }
-      fetch('https://hippocampus-309101.uc.r.appspot.com/updatePrefs', {
+      fetch('https://127.0.0.1/updatePrefs', {
         headers: {
         "Content-Type": "application/json"
         },

@@ -51,7 +51,7 @@ class SearchView extends React.Component {
       "Skill": this.state.likesData[i][0]
     }
 
-    fetch('https://hippocampus-309101.uc.r.appspot.com/deleteSkill', {
+    fetch('https://127.0.0.1/deleteSkill', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -62,7 +62,7 @@ class SearchView extends React.Component {
     .then((data) => {
       var data2 = {"UserID": this.state.userID}
       // console.log(data)
-      fetch('https://hippocampus-309101.uc.r.appspot.com/search', {
+      fetch('https://127.0.0.1/search', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -93,7 +93,7 @@ class SearchView extends React.Component {
       "UserID": this.state.userID
     }
 
-    fetch('https://hippocampus-309101.uc.r.appspot.com/search', {
+    fetch('https://127.0.0.1/search', {
       headers: {
         "Content-Type": "application/json"
       },

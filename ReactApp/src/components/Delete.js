@@ -50,7 +50,7 @@ class Delete extends React.Component {
       "Skill": this.state.Skill
     }
 
-    fetch('https://hippocampus-309101.uc.r.appspot.com/delete', {
+    fetch('https://127.0.0.1/delete', {
       headers: {
         "Content-Type": "application/json"
       },
