@@ -16,7 +16,7 @@ function Login() {
     console.log('Login Success: currentUser:', res.profileObj);
     sessionStorage.setItem('UserID', res.profileObj.googleId);
     sessionStorage.setItem('name', res.profileObj.name);
-    sessionStorage.setItem('CurrentFilter', "NoFilter")
+    // sessionStorage.setItem('CurrentFilter', "NoFilter")
 
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍.`
@@ -29,7 +29,7 @@ function Login() {
           "name": res.profileObj.name
         }
         // console.log(data)
-        fetch('https://127.0.0.1/findUser', {
+        fetch('http://127.0.0.1:5000/findUser', {
           headers: {
             "Content-Type": "application/json"
           },
@@ -56,7 +56,7 @@ function Login() {
             "UserID": res.profileObj.googleId,
           }
           // console.log(data)
-          fetch('https://127.0.0.1/autoFillDays', {
+          fetch('http://127.0.0.1:5000/autoFillDays', {
             headers: {
               "Content-Type": "application/json"
             },

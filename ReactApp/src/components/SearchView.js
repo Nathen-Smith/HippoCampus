@@ -51,7 +51,7 @@ class SearchView extends React.Component {
       "Skill": this.state.likesData[i][0]
     }
 
-    fetch('https://127.0.0.1:5000/deleteSkill', {
+    fetch('http://127.0.0.1:5000/deleteSkill', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -62,7 +62,7 @@ class SearchView extends React.Component {
     .then((data) => {
       var data2 = {"UserID": this.state.userID}
       // console.log(data)
-      fetch('https://127.0.0.1/search', {
+      fetch('http://127.0.0.1:5000/search', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -93,7 +93,7 @@ class SearchView extends React.Component {
       "UserID": this.state.userID
     }
 
-    fetch('https://127.0.0.1/search', {
+    fetch('http://127.0.0.1:5000/search', {
       headers: {
         "Content-Type": "application/json"
       },

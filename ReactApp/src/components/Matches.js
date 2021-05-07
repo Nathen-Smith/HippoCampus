@@ -20,7 +20,7 @@ class Create extends React.Component {
         "personUserID": this.state.matchesData[i][4],
       }
 
-      fetch('https://127.0.0.1/deletePerson', {
+      fetch('http://127.0.0.1:5000/deletePerson', {
         headers: {
           "Content-Type": "application/json"
         },
@@ -70,7 +70,7 @@ class Create extends React.Component {
         "LastName": "",
       }
       console.log(data)
-      fetch('https://127.0.0.1/matches', {
+      fetch('http://127.0.0.1:5000/matches', {
         headers: {
           "Content-Type": "application/json"
         },

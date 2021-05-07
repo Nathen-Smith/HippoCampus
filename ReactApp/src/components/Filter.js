@@ -60,7 +60,7 @@ class Filter extends Component {
         "UserID": sessionStorage.getItem("UserID"),
          "Preferences": selections
       }
-      fetch('https://127.0.0.1/updatePrefs', {
+      fetch('http://127.0.0.1:5000/updatePrefs', {
         headers: {
         "Content-Type": "application/json"
         },
