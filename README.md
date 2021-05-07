@@ -1,7 +1,7 @@
 # Building
 (Optional) virtualenv: https://cloud.google.com/python/docs/setup#installing_and_using_virtualenv
 
-# demo branch runs entirely on localhost, main is deployed
+## demo branch runs entirely on localhost, main is deployed
 
 Only need npm install first time: 
 ```
