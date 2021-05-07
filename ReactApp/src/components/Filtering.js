@@ -24,7 +24,7 @@ class Filtering extends React.Component {
       "Filter": sessionStorage.getItem("CurrentFilter")
     }
 
-    fetch('https://127.0.0.1/filter', {
+    fetch('http://127.0.0.1:5000/filter', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -52,7 +52,8 @@ class Filtering extends React.Component {
     }
     cards.forEach(function(item) {
       views.push(
-      <li key={item.index}>
+      <div key={item.index}>
+        {/* <br> */}
         {/* <Button className={styles.thick}
           variant="outline-danger"
           size="sm"
@@ -74,7 +75,7 @@ class Filtering extends React.Component {
         </Card> */}
 
         <Card>
-        <Card.Header>{this.state.likesData[0][3]}</Card.Header>
+        <Card.Header>{this.state.likesData[item.index][3]}</Card.Header>
         <Card.Body>
           <Card.Title>{this.state.likesData[item.index][0]+ ' '+ this.state.likesData[item.index][1]}</Card.Title>
           <Card.Text>
@@ -88,7 +89,9 @@ class Filtering extends React.Component {
         <span className={styles.normal}>
         {item.text}
         </span> */}
-      </li>
+        {/* </br> */}
+      </div>
+
       );
     }, this);
     return views;
@@ -100,7 +103,7 @@ class Filtering extends React.Component {
       "UserID": this.state.userID,
       "LikedID": this.state.likesData[i][5] 
     }
-    fetch('https://127.0.0.1/addLike', {
+    fetch('http://127.0.0.1:5000/addLike', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -111,7 +114,7 @@ class Filtering extends React.Component {
     .then((data) => {
       var data2 = {"UserID": this.state.userID}
       // console.log(data)
-      fetch('https://127.0.0.1/search', {
+      fetch('http://127.0.0.1:5000/search', {
       headers: {
         "Content-Type": "application/json"
       },

@@ -236,7 +236,7 @@ def filter():
             END
             '''
 
-    cursor.callproc('Filter', [int(hashed_ID)])
+    cursor.callproc('new_procedure', [int(hashed_ID)])
     # suggestions = []
     for result in cursor.stored_results():
         suggestions = (result.fetchall())

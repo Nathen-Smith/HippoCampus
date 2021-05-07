@@ -94,7 +94,7 @@ class Edit extends React.Component {
     }
     // console.log(data)
 
-    fetch('https://127.0.0.1/updateAvailability', {
+    fetch('http://127.0.0.1:5000/updateAvailability', {
       headers: {
         "Content-Type": "application/json"
       },
@@ -134,7 +134,7 @@ class Edit extends React.Component {
         Statement : this.state.Statement
     }
 
-    fetch('https://127.0.0.1/updateUser', {
+    fetch('http://127.0.0.1:5000/updateUser', {
       headers: {
         "Content-Type": "application/json"
       },
