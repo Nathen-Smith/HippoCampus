@@ -1,6 +1,6 @@
 import React from 'react';
 // import {
-    
+
 //     Redirect
 //   } from "react-router-dom";
   import { GoogleLogin } from 'react-google-login';
@@ -23,13 +23,13 @@ function Login() {
     );
     refreshTokenSetup(res);
     // <Redirect to="/user" />
-    
+
         var data =  {
           "UserID": res.profileObj.googleId,
           "name": res.profileObj.name
         }
         // console.log(data)
-        fetch('http://127.0.0.1:5000/findUser', {
+        fetch('https://127.0.0.1/findUser', {
           headers: {
             "Content-Type": "application/json"
           },
@@ -50,13 +50,13 @@ function Login() {
             sessionStorage.setItem('Statement', data_arr[0][9])
           }
           // console.log(data_arr[0][0])
-          
-          
+
+
           var data_availability =  {
             "UserID": res.profileObj.googleId,
           }
           // console.log(data)
-          fetch('http://127.0.0.1:5000/autoFillDays', {
+          fetch('https://127.0.0.1/autoFillDays', {
             headers: {
               "Content-Type": "application/json"
             },
@@ -68,7 +68,7 @@ function Login() {
             // console.log(data)
             var data_arr2 = JSON.parse(data2)
             // console.log(data_arr2)
-            
+
             sessionStorage.setItem('AvailableOnMonday', data_arr2[0][1])
             sessionStorage.setItem('AvailableOnTuesday', data_arr2[0][2])
             sessionStorage.setItem('AvailableOnWednesday', data_arr2[0][3])
@@ -76,17 +76,17 @@ function Login() {
             sessionStorage.setItem('AvailableOnFriday', data_arr2[0][5])
             sessionStorage.setItem('AvailableOnSaturday', data_arr2[0][6])
             sessionStorage.setItem('AvailableOnSunday', data_arr2[0][7])
-            
+
           })
-          
+
         })
         // sessionStorage.setItem('UserID', res.profileObj.googleId % 2147483647);
         // sessionStorage.setItem('name', res.profileObj.name)
         // window.location.reload()
 
         //we should use this item UserID to display if it is in session storage
-        
-      
+
+
 
   };
 

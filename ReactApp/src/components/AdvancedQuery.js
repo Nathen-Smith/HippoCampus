@@ -22,7 +22,7 @@ class AdvancedQuery extends React.Component {
       "UserID": this.state.userID
     }
 
-    fetch('http://127.0.0.1:5000/advanced', {
+    fetch('https://127.0.0.1/advanced', {
       headers: {
         "Content-Type": "application/json"
       },

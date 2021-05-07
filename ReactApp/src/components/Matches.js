@@ -20,7 +20,7 @@ class Create extends React.Component {
         "personUserID": this.state.matchesData[i][4],
       }
 
-      fetch('http://127.0.0.1:5000/deletePerson', {
+      fetch('https://127.0.0.1/deletePerson', {
         headers: {
           "Content-Type": "application/json"
         },
@@ -32,7 +32,7 @@ class Create extends React.Component {
         console.log(data)
       })
 
-      // fetch('http://127.0.0.1:5000/deletePerson', {
+      // fetch('https://127.0.0.1/deletePerson', {
       //   headers: {
       //     "Content-Type": "application/json"
       //   },
@@ -43,7 +43,7 @@ class Create extends React.Component {
       // .then((data) => {
       //   var data2 = {"UserID": this.state.userID}
       //   // console.log(data)
-      //   fetch('http://127.0.0.1:5000/search', {
+      //   fetch('https://127.0.0.1/search', {
       //   headers: {
       //     "Content-Type": "application/json"
       //   },
@@ -70,7 +70,7 @@ class Create extends React.Component {
         "LastName": "",
       }
       console.log(data)
-      fetch('http://127.0.0.1:5000/matches', {
+      fetch('https://127.0.0.1/matches', {
         headers: {
           "Content-Type": "application/json"
         },
@@ -103,7 +103,7 @@ class Create extends React.Component {
       return (
 
         <div>
-        <button onClick={this.searchMatches}> Load Matches </button>
+        <button onClick={this.searchMatches}> Load Favorites </button>
         {this.state.success === "t" &&
           <div>
             <table class="table">

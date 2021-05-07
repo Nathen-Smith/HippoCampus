@@ -50,7 +50,7 @@ class Delete extends React.Component {
       "Skill": this.state.Skill
     }
 
-    fetch('http://127.0.0.1:5000/delete', {
+    fetch('https://127.0.0.1/delete', {
       headers: {
         "Content-Type": "application/json"
       },
