@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
+import {Button, Container} from 'react-bootstrap'
 import Box from '@material-ui/core/Box';
 import '../App.css'
 
@@ -10,8 +11,11 @@ class Create extends React.Component {
       this.state = {
       UserID: sessionStorage.getItem("UserID"),
       Skill: "",
-        Rating: ""
+        Rating: "",
       }
+    }
+    handleChange = (e) => {
+      this.setState({Rating: e.target.value})
     }
   
     changeUserID = (e) => {
@@ -56,40 +60,43 @@ class Create extends React.Component {
     }
   
     render() {
-      // console.log(this.state.UserID)
-      // console.log(this.state.Skill)
-      // console.log(this.state.Rating)
-      // console.log(this.state.id4)
-      // console.log(this.state.id5)
       return (
-        <div className="row mt-1">
-          <Box color="black" bgcolor="DarkSeaGreen" p={1}> 
-          <h1>Insert Skill</h1>  
+          <div class="container p-3 my-3 bg-light text-dark">
 
-          {/* <h2>What ID?</h2>  
-          <input
-              type="text"
-              onChange={this.changeUserID}
-              value = {this.state.UserID}
-           />      */}
-          <h2>What Skill?</h2>
-          <input
-            type="text"
-            onChange={this.changeSkill}
-            value = {this.state.Skill}
-          />
-          <h2>What Rating?</h2>
+            <h2>Insert Skill</h2>  
 
-          <input
-            type="text"
-            onChange={this.changeRating}
-            value = {this.state.Rating}
-          />
-           <button onClick={this.insertLikes}>Insert Skill</button>
-          
-        </Box>
-        </div>
-  
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">What skill?</span>
+              </div>
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="(ex: 2-digit Multiplication)" 
+                aria-describedby="basic-addon3"
+                onChange={this.changeSkill}
+                value = {this.state.Skill}
+              />
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">What rating?</span>
+              </div>
+              <select 
+                class="input-group-mb-3"
+                value={this.state.selectRating} 
+                onChange={this.changeRating} 
+              >
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            
+              <Button variant="primary" onClick={this.insertLikes}>Insert Skill</Button>
+
+            </div>
+          </div>
+
       )
     }
   }

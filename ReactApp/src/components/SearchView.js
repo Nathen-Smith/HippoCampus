@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
-import {Button} from 'react-bootstrap'
+import {Button, Container} from 'react-bootstrap'
 import Box from '@material-ui/core/Box';
 import styles from './SearchView.module.css';
 // import { Link } from 'react-router-dom'
@@ -121,17 +121,20 @@ class SearchView extends React.Component {
     //   perskill.push(<button>PLS</button>)
     // }
     return (
-      <div className="row mt-5">
-        <Box color="black" bgcolor="DarkSeaGreen" p={1}>
+      <div class="container p-3 my-3 bg-light text-dark">
+      {/* // <div className="row mt-5"> */}
+        {/* // <Box component="span" color="black" bgcolor="DarkSeaGreen" p={1}> */}
         {/* this.searchLikes;
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
-        <h1>Edit Skills</h1>
+        {/* <Container fluid="md" maxWidth="sm">  */}
+        <div>
+        <h2>Edit Skills</h2>
         {/* <Link to="/editskills">
             <Button>
                   Click Me!
             </Button>
         </Link> */}
-         <Button variant="secondary" onClick={this.searchLikes}>Show Skills</Button>
+         <Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
          {/* <text>{"\n"}</text> */}
          {this.state.success === "f" && <h2>User doesn't exist</h2>}
          {this.state.success ==="t" &&
@@ -142,7 +145,9 @@ class SearchView extends React.Component {
             </div>
 
          }
-         </Box>
+         {/* </Box> */}
+         {/* </Container>   */}
+         </div>
       </div>
 
     )

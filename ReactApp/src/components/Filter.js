@@ -92,9 +92,11 @@ class Filter extends Component {
 
   render() {
     return (    
-      <div className="container">        
-        <div className="row mt-5">
-          <div className="col-sm-12">
+      // <div className="container">
+      <div class="container p-3 my-3 bg-light text-dark">
+       
+        {/* <div className="row mt-5"> */}
+          {/* <div className="col-sm-12"> */}
             <h2>Filter Cards By</h2>
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
@@ -119,8 +121,8 @@ class Filter extends Component {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
       </div>
     );
   }
