@@ -128,7 +128,7 @@ class SearchView extends React.Component {
               <h3>Skill(s): {this.state.likesData.join(", ")}</h3> */}
         {/* <Container fluid="md" maxWidth="sm">  */}
         <div>
-        <h2>Edit Skills</h2>
+        <h2>Edit skills</h2>
         {/* <Link to="/editskills">
             <Button>
                   Click Me!

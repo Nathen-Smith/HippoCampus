@@ -97,7 +97,7 @@ class Filter extends Component {
        
         {/* <div className="row mt-5"> */}
           {/* <div className="col-sm-12"> */}
-            <h2>Filter Cards By</h2>
+            <h2>Filter cards by</h2>
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
 

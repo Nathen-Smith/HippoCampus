@@ -24,7 +24,12 @@ export default function Routes() {
     <Switch>
       <Route exact path="/"><Home /></Route>
       <Route exact path="/login"><Login /> </Route>
-      <Route exact path="/edit"><Edit /> <SearchView/><Create/><Filter/></Route>
+      <Route exact path="/edit">
+        <Edit /> 
+        <SearchView/>
+        <Create/>
+        <Filter/>
+      </Route>
         {/* <Redirect to="/user" /> */}
       <Route exact path="/logout"><Logout /></Route>
       <Route exact path="/matches"><MatchesTab /></Route>

@@ -35,9 +35,13 @@ def create():
     insert_user = 'Insert IGNORE Into User (UserID) VALUES (' + hashed_ID + ');'
     cursor.execute(insert_user)
 
-    insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, %s);'
     cursor = connection.cursor()
-    cursor.execute(insert_likes, (hashed_ID, data['Skill'], data['Rating']))
+    if data['Rating'] == 'None':
+        insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, 4);'
+        cursor.execute(insert_likes, (hashed_ID, data['Skill']))
+    else:
+        insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, %s);'
+        cursor.execute(insert_likes, (hashed_ID, data['Skill'], data['Rating']))
 
     test = 'Select * From Skills WHERE UserID = ' + hashed_ID + ';'
     cursor = connection.cursor()

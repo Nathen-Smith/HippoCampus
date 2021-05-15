@@ -2,28 +2,96 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import Box from '@material-ui/core/Box';
+import {Button, Container, Col, Row} from 'react-bootstrap'
+// import Checkbox from "../components/Checkbox";
 import '../App.css'
+
+// const OPTIONS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 class Edit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        Age : sessionStorage.getItem('Age'),
-        ClassStanding : sessionStorage.getItem('ClassStanding'),
-        Location : sessionStorage.getItem('Location'),
-        Major : sessionStorage.getItem('Major'),
-        Minor : sessionStorage.getItem('Minor'),
-        Bio : sessionStorage.getItem('Bio'),
-        Statement : sessionStorage.getItem('Statement'),
-        AvailableOnMonday: sessionStorage.getItem('AvailableOnMonday'),
-        AvailableOnTuesday: sessionStorage.getItem('AvailableOnTuesday'),
-        AvailableOnWednesday: sessionStorage.getItem('AvailableOnWednesday'),
-        AvailableOnThursday: sessionStorage.getItem('AvailableOnThursday'),
-        AvailableOnFriday: sessionStorage.getItem('AvailableOnFriday'),
-        AvailableOnSaturday: sessionStorage.getItem('AvailableOnSaturday'),
-        AvailableOnSunday: sessionStorage.getItem('AvailableOnSunday')
+      // checkboxes: OPTIONS.reduce(
+      //   (options, option) => ({
+      //     ...options,
+      //     [option]: false
+      //   }),
+      // ),
+      Age : sessionStorage.getItem('Age'),
+      ClassStanding : sessionStorage.getItem('ClassStanding'),
+      Location : sessionStorage.getItem('Location'),
+      Major : sessionStorage.getItem('Major'),
+      Minor : sessionStorage.getItem('Minor'),
+      Bio : sessionStorage.getItem('Bio'),
+      Statement : sessionStorage.getItem('Statement'),
+      AvailableOnMonday: sessionStorage.getItem('AvailableOnMonday'),
+      AvailableOnTuesday: sessionStorage.getItem('AvailableOnTuesday'),
+      AvailableOnWednesday: sessionStorage.getItem('AvailableOnWednesday'),
+      AvailableOnThursday: sessionStorage.getItem('AvailableOnThursday'),
+      AvailableOnFriday: sessionStorage.getItem('AvailableOnFriday'),
+      AvailableOnSaturday: sessionStorage.getItem('AvailableOnSaturday'),
+      AvailableOnSunday: sessionStorage.getItem('AvailableOnSunday')
+    }
   }
-}
+  ////////////////////////////////////////////////////////
+  // handleCheckboxChange = changeEvent => {
+  //   const { name } = changeEvent.target;
+
+  //   this.setState(prevState => ({
+  //     checkboxes: {
+  //       ...prevState.checkboxes,
+  //       [name]: !prevState.checkboxes[name]
+  //     }
+  //   }));
+  // };
+
+  // handleFormSubmit = formSubmitEvent => {
+  //   formSubmitEvent.preventDefault();
+  //   var selections = []
+  //   Object.keys(this.state.checkboxes)
+  //     .filter(checkbox => this.state.checkboxes[checkbox])
+  //     .forEach(checkbox => {
+  //       if (this.state.checkboxes[checkbox] === true) {
+  //         console.log(checkbox, "is selected.");
+  //         selections.push(checkbox)
+  //       }
+  //     });
+
+  //     var data = {
+  //       "UserID": sessionStorage.getItem("UserID"),
+  //        "Preferences": selections
+  //     }
+  //     fetch('http://127.0.0.1:5000/updatePrefs', {
+  //       headers: {
+  //       "Content-Type": "application/json"
+  //       },
+  //       method: "POST",
+  //       body: JSON.stringify(data)
+  //     })
+  //     .then(response => response.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       if (data !== "") {
+  //         // this.setState({success:"t", likesData: data})
+  //       } else {
+  //         // this.setState({success:"f"})
+  //       }
+  //     })
+      
+  // };
+
+  // createCheckbox = option => (
+  //   <Checkbox
+  //     label={option}
+  //     isSelected={this.state.checkboxes[option]}
+  //     onCheckboxChange={this.handleCheckboxChange}
+  //     key={option}
+  //   />
+  // );
+
+  // createCheckboxes = () => OPTIONS.map(this.createCheckbox);
+  ////////////////////////////////////////////////////////////
 
   changeAge = (e) => {
     this.setState({Age: e.target.value})
@@ -164,15 +232,30 @@ class Edit extends React.Component {
     // console.log(this.state.id4)
     // console.log(this.state.id5)
     return (
-      <div className="row mt-5">
-        <Box color="white" bgcolor="DarkOliveGreen" p={1}>
-          <h1>Update Your Profile</h1>
-          <h2>Age</h2>
-          <input
+      <div class="container p-3 my-3 bg-light text-dark">
+        {/* <Row> */}
+        {/* <Col> */}
+      {/* <div className="row mt-5"> */}
+        {/* <Box color="white" bgcolor="DarkOliveGreen" p={1}> */}
+          <h2>Update Your Profile</h2>
+          <h5>Age</h5>
+          <Row>
+            <Col md={2}>
+              <div class="input-group mb-3">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeAge}
+                  value = {this.state.Age}
+                />
+              </div>
+            </Col>
+          </Row>
+          {/* <input
               type="text"
               onChange={this.changeAge}
               value = {this.state.Age}
-          />
+          /> */}
           <h2>Class Standing</h2>
           <input
               type="text"
@@ -210,10 +293,35 @@ class Edit extends React.Component {
               value={this.state.Statement}
           />
           <button onClick={this.updateUser}>Update User Info</button>
-        </Box>
-        <Box color="black" bgcolor="DarkKhaki" p={1}>
-        <h1>Update Your Availability</h1>
-        <h2>Available on Monday</h2>
+        {/* </Box> */}
+        {/* <Box color="black" bgcolor="DarkKhaki" p={1}> */}
+        {/* </Col>
+        <Col> */}
+        {/* <h1>Update Your Availability</h1>
+        <form onSubmit={this.handleFormSubmit}>
+              {this.createCheckboxes()}
+
+              {/* <div className="form-group mt-2"> */}
+                {/* <button
+                  type="button"
+                  className="btn btn-outline-primary mr-2"
+                  onClick={this.selectAll}
+                >
+                  Select All
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary mr-2"
+                  onClick={this.deselectAll}
+                >
+                  Deselect All
+                </button> */}
+                {/* <button type="submit" className="btn btn-primary" >
+                  Save
+                </button> */}
+              {/* </div> */}
+            {/* </form> */}
+        {/* <h2>Available on Monday</h2>
         <input
             type="text"
             onChange={this.changeMonday}
@@ -254,12 +362,15 @@ class Edit extends React.Component {
             type="text"
             onChange={this.changeSunday}
             value={this.state.AvailableOnSunday}
-         />
-         <button onClick={this.updateAvailability}>Update Availability</button>
-         </Box>  
+         /> */}
+         {/* <button onClick={this.updateAvailability}>Update Availability</button> */}
+         {/* </Box>   */}
+         {/* </Col>
+         </Row> */}
      
+      {/* </div> */}
+      
       </div>
-
     )
   }
 }
