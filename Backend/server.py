@@ -13,7 +13,14 @@ dbUser = "root"
 dbPass = "b49NteBOf7k5gar3"
 dbName = 'HippoCampus'
 
-connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPass, database = dbName)
+# connection = mysql.connector.connect(host = dbIP, user = dbUser, password = dbPass, database = dbName)
+
+connection = mysql.connector.connect (
+    host = "35.238.147.89",
+    user = "root",
+    password = "b49NteBOf7k5gar3",
+    database = "HippoCampus"
+)
 SQL_MAX_NUM = 2147483647
 
 def _get_db_UserID(google_Id):
@@ -37,7 +44,8 @@ def create():
 
     cursor = connection.cursor()
     if data['Rating'] == 'None':
-        insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, 4);'
+        # Rating cannot be null. Fill in with an arbitrary value
+        insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, 3);'
         cursor.execute(insert_likes, (hashed_ID, data['Skill']))
     else:
         insert_likes = 'REPLACE Into Skills (UserID, Skill, Rating) VALUES (%s, %s, %s);'

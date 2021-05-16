@@ -1,8 +1,8 @@
 import React from "react";
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+// import Card from 'react-bootstrap/Card'
+// import Button from 'react-bootstrap/Button'
 import Filtering from "../components/Filtering"
-import AdvancedQuery from "../components/AdvancedQuery"
+// import AdvancedQuery from "../components/AdvancedQuery"
 
 export default function makeMatches() {
     return (

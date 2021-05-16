@@ -11,7 +11,7 @@ class Create extends React.Component {
     this.state = {
       UserID: sessionStorage.getItem("UserID"),
       Skill: "",
-      Rating: "5",
+      Rating: "5"
     }
   }
 

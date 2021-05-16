@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
-import Box from '@material-ui/core/Box';
-import {Button, Container, Col, Row} from 'react-bootstrap'
+// import Box from '@material-ui/core/Box';
+import {Button, Col, Row} from 'react-bootstrap'
 // import Checkbox from "../components/Checkbox";
 import '../App.css'
 
@@ -224,6 +224,7 @@ class Edit extends React.Component {
     
   }
 
+  // var name = sessionStorage.getItem("name")
 
   render() {
     // console.log(this.state.id1)
@@ -233,66 +234,158 @@ class Edit extends React.Component {
     // console.log(this.state.id5)
     return (
       <div class="container p-3 my-3 bg-light text-dark">
-        {/* <Row> */}
-        {/* <Col> */}
-      {/* <div className="row mt-5"> */}
-        {/* <Box color="white" bgcolor="DarkOliveGreen" p={1}> */}
-          <h2>Update Your Profile</h2>
-          <h5>Age</h5>
+        <h1>{sessionStorage.getItem("name")}</h1>
+          <Row>
+            <Col md={3} style={{marginRight:"20px", marginLeft:"15px"}}>
+              <Row style={{width:"280px"}}>
+                <h6>Major</h6>
+              </Row>
+              <Row style={{width:"280px"}}>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeMajor}
+                  value={this.state.Major}
+                  style={{border: "1px solid #aaa", width:"280px", marginBottom:"10px"}}
+                />
+              </Row>
+            </Col>
+            <Col md={3}>
+              <Row style={{width:"280px"}}>
+                <h6>Minor</h6>
+              </Row>
+              <Row style={{width:"280px"}}>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    onChange={this.changeMinor}
+                    value = {this.state.Minor}
+                    style={{border: "1px solid #aaa", width:"280px", marginBottom:"10px"}}
+                  />
+              </Row>
+            </Col>
+          </Row>
+          <h6>Class Standing</h6>
+          <Row>
+            <Col md={3}>
+              {/* <div class="input-group mb-3"> */}
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeClassStanding}
+                  value = {this.state.ClassStanding}
+                  style={{border: "1px solid #aaa", width:"280px", marginBottom:"10px"}}
+                />
+              {/* </div> */}
+            </Col>
+          </Row>
+          <h6>Location</h6>
+          <Row>
+            <Col md={3}>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeLocation}
+                  value = {this.state.Location}
+                  style={{border: "1px solid #aaa", width:"280px", marginBottom:"10px"}}
+                />
+            </Col>
+          </Row>
+          <h6>Bio</h6>
+          <Row>
+            <Col>
+                <textarea
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeBio}
+                  value = {this.state.Bio}
+                  style={{border: "1px solid #aaa", marginBottom:"10px"}}
+                />
+            </Col>
+          </Row>
+          <h6>Statement</h6>
+          <Row>
+            <Col>
+              <div class="input-group mb-3">
+                <input
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeStatement}
+                  value = {this.state.Statement}
+                  style={{border: "1px solid #aaa"}}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Button onClick={this.updateUser}>Save</Button>
+          {/*old code//////////////////////////////////////////////////}
+          {/* <h6>Location</h6>
           <Row>
             <Col md={2}>
               <div class="input-group mb-3">
                 <input 
                   type="text" 
                   class="form-control" 
-                  onChange={this.changeAge}
-                  value = {this.state.Age}
+                  onChange={this.changeLocation}
+                  value = {this.state.Location}
                 />
               </div>
             </Col>
-          </Row>
+          </Row> */}
+          {/* <h6>Major</h6> */}
+          
+          {/* <h6>Minor</h6>
+          <Row>
+            <Col md={2}>
+              <div class="input-group mb-3">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  onChange={this.changeMinor}
+                  value = {this.state.Minor}
+                />
+              </div>
+            </Col>
+          </Row> */}
           {/* <input
               type="text"
               onChange={this.changeAge}
               value = {this.state.Age}
           /> */}
-          <h2>Class Standing</h2>
+          {/* <h2>Class Standing</h2>
           <input
               type="text"
-              onChange={this.changeClassStanding}
-              value = {this.state.ClassStanding}
-          />
-          <h2>Location</h2>
+              
+          /> */}
+          {/* <h2>Location</h2>
           <input
               type="text"
-              onChange={this.changeLocation}
-              value = {this.state.Location}
-          />
-          <h2>Major</h2>
+              
+          /> */}
+          {/* <h2>Major</h2>
           <input
               type="text"
               onChange={this.changeMajor}
               value = {this.state.Major}
-          />
-          <h2>Minor</h2>
+          /> */}
+          {/* <h2>Minor</h2>
           <input
               type="text"
               onChange={this.changeMinor}
               value = {this.state.Minor}
-          />
-          <h2>Bio</h2>
+          /> */}
+          {/* <h2>Bio</h2>
           <input
               type="text"
               onChange={this.changeBio}
               value={this.state.Bio}
-          />
-          <h2>Statement</h2>
+          /> */}
+          {/* <h2>Statement</h2>
           <input
               type="text"
               onChange={this.changeStatement}
               value={this.state.Statement}
-          />
-          <button onClick={this.updateUser}>Update User Info</button>
+          /> */}
         {/* </Box> */}
         {/* <Box color="black" bgcolor="DarkKhaki" p={1}> */}
         {/* </Col>

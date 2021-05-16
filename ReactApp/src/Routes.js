@@ -10,8 +10,10 @@ import CardsTab from "./containers/CardsTab"
 
 import Edit from "./containers/Edit"
 import SearchView from "./components/SearchView"
-import Create from "./components/Create"
+// import Create from "./components/Create"
 import Filter from "./components/Filter"
+
+import Autofill from "./components/Autofill"
 
 
 // import AuthenticatedRoute from "./components/AuthenticatedRoute";
@@ -26,8 +28,9 @@ export default function Routes() {
       <Route exact path="/login"><Login /> </Route>
       <Route exact path="/edit">
         <Edit /> 
+        <Autofill/>
         <SearchView/>
-        <Create/>
+        {/* <Create/> */}
         <Filter/>
       </Route>
         {/* <Redirect to="/user" /> */}

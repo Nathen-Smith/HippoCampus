@@ -2,8 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
-import {Button, Container} from 'react-bootstrap'
-import Box from '@material-ui/core/Box';
+import {Button} from 'react-bootstrap'
+// import Box from '@material-ui/core/Box';
 import styles from './SearchView.module.css';
 // import { Link } from 'react-router-dom'
 
