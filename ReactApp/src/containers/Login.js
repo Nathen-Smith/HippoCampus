@@ -1,8 +1,5 @@
 import React from 'react';
-// import {
 
-//     Redirect
-//   } from "react-router-dom";
   import { GoogleLogin } from 'react-google-login';
 // refresh token
 import { refreshTokenSetup } from '../utils/refreshToken';
@@ -76,13 +73,12 @@ function Login() {
             sessionStorage.setItem('AvailableOnFriday', data_arr2[0][5])
             sessionStorage.setItem('AvailableOnSaturday', data_arr2[0][6])
             sessionStorage.setItem('AvailableOnSunday', data_arr2[0][7])
-
+            window.location.reload()
           })
 
         })
         // sessionStorage.setItem('UserID', res.profileObj.googleId % 2147483647);
         // sessionStorage.setItem('name', res.profileObj.name)
-        // window.location.reload()
 
         //we should use this item UserID to display if it is in session storage
 
@@ -108,6 +104,7 @@ function Login() {
         style={{ marginTop: '100px' }}
         isSignedIn={true}
       />
+      {/* {this.state.UserID && this.forceUpdate()}  */}
     </div>
   );
 }
