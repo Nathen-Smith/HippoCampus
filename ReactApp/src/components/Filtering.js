@@ -10,7 +10,8 @@ class Filtering extends React.Component {
     this.state = {
       userID: sessionStorage.getItem("UserID"),
       success: "",
-      likesData: []
+      likesData: [],
+      curr_idx: 0
     }
   }
 
@@ -20,8 +21,7 @@ class Filtering extends React.Component {
 
   searchLikes = () => {
     var data =  {
-      "UserID": this.state.userID, 
-      "Filter": sessionStorage.getItem("CurrentFilter")
+      "UserID": this.state.userID
     }
 
     fetch('http://127.0.0.1:5000/filter', {
@@ -52,7 +52,7 @@ class Filtering extends React.Component {
     }
     cards.forEach(function(item) {
       views.push(
-      <div key={item.index}>
+      <div key={item.index} style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
         {/* <br> */}
         {/* <Button className={styles.thick}
           variant="outline-danger"
@@ -74,7 +74,7 @@ class Filtering extends React.Component {
         </Card.Body>
         </Card> */}
 
-        <Card>
+        <Card style={{width: "400px"}}>
         <Card.Header>{this.state.likesData[item.index][3]}</Card.Header>
         <Card.Body>
           <Card.Title>{this.state.likesData[item.index][0]+ ' '+ this.state.likesData[item.index][1]}</Card.Title>
@@ -94,7 +94,7 @@ class Filtering extends React.Component {
 
       );
     }, this);
-    return views;
+    return views[this.state.curr_idx];
   }
   
   likedUser = (i) => {
@@ -126,6 +126,13 @@ class Filtering extends React.Component {
       console.log(data)
       if (data !== "") {
           this.setState({success:"t"})
+          if (this.state.curr_idx >= this.state.likesData.length) {
+            this.setState({curr_idx: 0})
+            alert("Add more to your preferences!")
+            window.location.reload()
+          } else {
+            this.setState({curr_idx: this.state.curr_idx + 1})
+          }
       } else {
           this.setState({success:"f"})
       }
@@ -138,37 +145,15 @@ class Filtering extends React.Component {
     return (
       <div>
         {/*<h1>Filter</h1>*/}
-         <button onClick={this.searchLikes}>Find!</button>
-         {this.state.success === "f" && <h2>User doesn't exist</h2>}
-         {this.state.success ==="t" && 
-
-            // <div>
-            // {/* look into the map function in js*/}
-            //     <h2>Users in the CS Major:</h2>
-
-            //     {/*NEED TO PUT THIS IN A FOR LOOP*/}
-
-            //     <Card style={{ width: '18rem' }}>
-            //       <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-            //       <Card.Body>
-            //         <Card.Title>{this.state.likesData[0][0]+ ' '+ this.state.likesData[0][1]}</Card.Title>
-            //         <Card.Text>
-            //           {this.state.likesData[0][2]}
-            //           <br></br>
-            //           {this.state.likesData[0][3]}
-            //         </Card.Text>
-            //         <Button variant="danger">❤</Button>
-            //       </Card.Body>
-            //     </Card>     
-
-
-            // </div>
+          <button onClick={this.searchLikes}>Find!</button>
+          {this.state.success === "f" && <h2>User doesn't exist</h2>}
+          {this.state.success ==="t" && 
             <div>
-            <br/>
-              {this.generateCards(this.state.likesData.length, this.state.likesData)}
-            <br/>
-          </div>
-         }
+              <br/>
+                {this.generateCards(this.state.likesData.length, this.state.likesData)}
+              <br/>
+            </div>
+          }
      
       </div>
 
