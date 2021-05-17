@@ -78,7 +78,6 @@ class Create extends React.Component {
                     <option value="3">3</option>
                     <option value="2">2</option>
                     <option value="1">1</option>
-                    <option value="None">None</option>
                   </select>
                   <Button variant="primary" onClick={this.insertLikes}>Insert Skill</Button>
                 </div>

@@ -4,37 +4,32 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login"
 import Logout from "./containers/Logout"
-
 import MatchesTab from "./containers/MatchesTab"
 import CardsTab from "./containers/CardsTab"
-
 import Edit from "./containers/Edit"
-import SearchView from "./components/SearchView"
-// import Create from "./components/Create"
 import Filter from "./components/Filter"
-
 import Autofill from "./components/Autofill"
-
-
-// import AuthenticatedRoute from "./components/AuthenticatedRoute";
-// import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
-// import { Redirect} from "react-router-dom";
+// import LoginHooks from "./containers/LoginHooks"
+// import LogoutHooks from "./containers/LogoutHooks"
  
 // on home page, check if there is a UserID somehow
 export default function Routes() {
   return (
     <Switch>
       <Route exact path="/"><Home /></Route>
-      <Route exact path="/login"><Login /> </Route>
+      <Route exact path="/login">
+        <Login/>
+        {/* <LoginHooks/> */}
+      </Route>
       <Route exact path="/edit">
         <Edit /> 
         <Autofill/>
-        <SearchView/>
-        {/* <Create/> */}
         <Filter/>
       </Route>
-        {/* <Redirect to="/user" /> */}
-      <Route exact path="/logout"><Logout /></Route>
+      <Route exact path="/logout">
+        <Logout/>
+        {/* <LogoutHooks/> */}
+      </Route>
       <Route exact path="/matches"><MatchesTab /></Route>
       <Route exact path="/find"><CardsTab /></Route>
 

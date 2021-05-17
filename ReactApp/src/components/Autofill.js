@@ -3,6 +3,8 @@ import Autosuggest from 'react-autosuggest'
 import './Autofill.css'
 import './Rating.css'
 import {Button, Row, Col} from 'react-bootstrap'
+import styles from './SearchView.module.css';
+
 
 const languages = [	
 	{name: 'C#'},
@@ -170,14 +172,22 @@ const languages = [
   
   class Autofill extends React.Component {
     constructor() {
+			if (window.performance) {
+				if (performance.navigation.type === 1) {
+					sessionStorage.removeItem('viewing_skills')
+				}
+			}
       super();
-  
       this.state = {
         value: '',
         suggestions: [],
 				UserID: sessionStorage.getItem("UserID"),
 				// Skill: "",
-				Rating: "5"
+				Rating: "5",
+				success: "",
+				likesData: [],
+				toRemove: "",
+				editing: false
       };    
     }
   
@@ -222,10 +232,99 @@ const languages = [
 				.then(response => response.text())
 				.then((data) => {
 					console.log(data)
-					// this.setState({UserID: this.state.UserID})
+					if (sessionStorage.getItem('viewing_skills')) {
+						// if user is viewing skills, reload to update
+						this.searchLikes()
+					} 
 				})
 			}
 			
+		}
+		renderButtons = (num_skills, data) => {
+			var views = [], buttons = []
+			for (var i = 0; i < num_skills; i++) {
+				buttons.push({index: i, text: data[i]})
+			}
+			buttons.forEach(function(item) {
+				views.push(
+				<li key={item.index}>
+					<Button
+						variant="danger"
+						size="sm"
+						onClick={this.removeSkill.bind(null, item.index)}>
+						Remove
+					</Button>{" "}
+	
+					<span className={styles.normal}>
+					{item.text}
+					</span>
+				</li>
+				);
+			}, this);
+			return views;
+		}
+	
+		removeSkill = (i) => {
+			if(window.confirm("Are you sure you want to delete this skill?")) {
+			var data =  {
+				"UserID": this.state.UserID,
+				"Skill": this.state.likesData[i][0]
+			}
+	
+			fetch('http://127.0.0.1:5000/deleteSkill', {
+				headers: {
+					"Content-Type": "application/json"
+				},
+				method: "POST",
+				body: JSON.stringify(data)
+			})
+			.then(response => response.json())
+			.then((data) => {
+				var data2 = {"UserID": this.state.UserID}
+				// console.log(data)
+				fetch('http://127.0.0.1:5000/search', {
+				headers: {
+					"Content-Type": "application/json"
+				},
+				method: "POST",
+				body: JSON.stringify(data2)
+			})
+			.then(response => response.json())
+			.then((data) => {
+				console.log(data)
+				if (data !== "") {
+						this.setState({success:"t", likesData: data})
+				} else {
+						this.setState({success:"f"})
+				}
+			})
+			})
+	
+		}}
+	
+		searchLikes = () => {
+			var data =  {
+				"UserID": this.state.UserID
+			}
+	
+			fetch('http://127.0.0.1:5000/search', {
+				headers: {
+					"Content-Type": "application/json"
+				},
+				method: "POST",
+				body: JSON.stringify(data)
+			})
+			.then(response => response.json())
+			.then((data) => {
+				console.log(data)
+				if (data !== "") {
+						window.sessionStorage.setItem('viewing_skills', 'True')
+						this.setState({success:"t", likesData: data})
+				} else {
+						this.setState({success:"f"})
+				}
+			})
+	
 		}
   
     render() {
@@ -275,13 +374,25 @@ const languages = [
                     <option value="3">3</option>
                     <option value="2">2</option>
                     <option value="1">1</option>
-                    <option value="None">None</option>
+                    {/* <option value="None">None</option> */}
                   </select>
                   <Button variant="outline-primary" onClick={this.insertLikes}>Add</Button>
             		</div>
             	</div>
           	</Col>
           </Row>
+					<div>
+        		<h2>Edit skills</h2>
+       			<Button variant="outline-primary" onClick={this.searchLikes}>Show Skills</Button>
+         		{this.state.success === "f" && <h2>User doesn't exist</h2>}
+         		{this.state.success ==="t" &&
+            <div>
+              <br/>
+              {this.renderButtons(this.state.likesData.length, this.state.likesData)}
+              <br/>
+            </div>
+          	}
+         </div>
 				</div>
       );
     }
