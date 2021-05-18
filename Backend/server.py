@@ -337,7 +337,6 @@ def deleteSkill():
 @app.route("/deletePerson", methods=['POST'])
 def deletePerson():
     """ recieves post requests to add new task """
-    connection.reconnect()
     data = request.get_json()
     hashed_ID = _get_db_UserID(data["UserID"])
     deleting_ID = str(data["personUserID"])
@@ -358,9 +357,8 @@ def deletePerson():
     # delete_query_like5 = '''update Likes
     #                     set Like5 = IF(Like5 = ''' + deleting_ID + ''', null, Like5)
     #                     where UserId = ''' + hashed_ID + ''';'''
-
+    connection.reconnect()
     cursor = connection.cursor()
-
     cursor.execute(delete)
     # cursor.execute(delete_query_like2)
     # cursor.execute(delete_query_like3)
@@ -383,7 +381,7 @@ def searchMatches():
     # hashed_ID = "1" # this is temporary remove when done w testing
     findLikes =     '''select FirstName, LastName, Major, ClassStanding, UserId
                     from User
-                    where UserId = (select LikedUserID
+                    where UserId IN (select LikedUserID
                     				from User u NATURAL JOIN Likes l
                     				where u.UserId =''' + hashed_ID + ''');'''
 
@@ -391,7 +389,6 @@ def searchMatches():
     result = cursor.fetchall()
     if len(result) == 0:
         return jsonify([])
-    print(result)
     return jsonify(result)
 
 

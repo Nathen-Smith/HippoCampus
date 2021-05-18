@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
+import {Button} from 'react-bootstrap'
 // import Form from 'react-bootstrap/Form'
 import '../App.css'
 
@@ -15,6 +16,7 @@ class Create extends React.Component {
 
     removePerson = (i) => {
       if(window.confirm("Are you sure you want to delete this person?")) {
+        // console.log(this.state.matchesData)
       var data =  {
         "UserID": this.state.userID,
         "personUserID": this.state.matchesData[i][4],
@@ -29,38 +31,9 @@ class Create extends React.Component {
       })
       .then(response => response.text())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
+        this.searchMatches()
       })
-
-      // fetch('https://127.0.0.1/deletePerson', {
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   method: "POST",
-      //   body: JSON.stringify(data)
-      // })
-      // .then(response => response.json())
-      // .then((data) => {
-      //   var data2 = {"UserID": this.state.userID}
-      //   // console.log(data)
-      //   fetch('https://127.0.0.1/search', {
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   method: "POST",
-      //   body: JSON.stringify(data2)
-      // })
-      // .then(response => response.json())
-      // .then((data) => {
-      //   console.log(data)
-      //   if (data !== "") {
-      //     // i thin kthis will cause a problem w matchesData being rewritten idk
-      //       this.setState({success:"t", matchesData: data})
-      //   } else {
-      //       this.setState({success:"f"})
-      //   }
-      // })
-      // })
 
     }}
     searchMatches = () => {
@@ -69,7 +42,7 @@ class Create extends React.Component {
         "FirstName": "",
         "LastName": "",
       }
-      console.log(data)
+      // console.log(data)
       fetch('http://127.0.0.1:5000/matches', {
         headers: {
           "Content-Type": "application/json"
@@ -79,31 +52,23 @@ class Create extends React.Component {
       })
       .then(response => response.json())
       .then((data) => {
-        console.log(data)
-        if (data !== "") {
+        // console.log(data)
+        if (data.length !== 0) {
           this.setState({success:"t", matchesData : data})
         } else {
+          alert("No favorites...yet ;)")
           this.setState({success: "f"})
         }
       })
     }
-
-    // deleteAndSearch = (i) => {
-    //   this.removePerson.bind(null, i),
-    //   this.searchMatches;
-    // }
     removeAndSearch = (i) => {
       this.removePerson(i)
-      this.searchMatches()
-      this.setState({success:"f"})
-      window.location.reload()
-      this.setState({success:"t"})
     }
     render() {
       return (
 
         <div>
-        <button onClick={this.searchMatches}> Load Favorites </button>
+        <Button variant="outline-primary" onClick={this.searchMatches}> Load Favorites </Button>
         {this.state.success === "t" &&
           <div>
             <table class="table">
@@ -116,19 +81,19 @@ class Create extends React.Component {
             </tr>
             </thead>
 
-          {this.state.matchesData.slice(0, this.state.matchesData.length).map((item, index) => {
-          return (
-            <tr>
-              <td>{item[0] + " " + item[1]}</td>
-              <td>{item[2]}</td>
-              <td>{item[3]}</td>
-              <button onClick={this.removeAndSearch.bind(null,index)}> Remove Person </button>
-            </tr>
-          );
-        })}
+            {this.state.matchesData.slice(0, this.state.matchesData.length).map((item, index) => {
+            return (
+              <tr>
+                <td>{item[0] + " " + item[1]}</td>
+                <td>{item[2]}</td>
+                <td>{item[3]}</td>
+                <Button variant="outline-danger"onClick={this.removeAndSearch.bind(null,index)}> Remove</Button>
+              </tr>
+            );
+          })}
             </table>
             </div>
-          }
+    }
           </div>
       )
     }

@@ -33,17 +33,20 @@ class Filtering extends React.Component {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data)
-      if (data !== "") {
-          this.setState({success:"t", likesData: data})
+      console.log(data.length)
+      if (data.length !== 0) {
+        this.setState({success:"t", likesData: data})
       } else {
-          this.setState({success:"f"})
+        alert("No matches :( \nSelect preferences in the Edit Profile tab")
+        this.setState({success:"f"})
+
       }
     })
     
   }
 
   generateCards (num_cards, data) {
+    console.log(num_cards)
     var views = [], cards = []
     for (var i = 0; i < num_cards; i++) {
       if (data[i][0] != null && data[i][1] != null) {
@@ -145,13 +148,12 @@ class Filtering extends React.Component {
     return (
       <div>
         {/*<h1>Filter</h1>*/}
-          <button onClick={this.searchLikes}>Find!</button>
-          {this.state.success === "f" && <h2>User doesn't exist</h2>}
+          <Button variant="outline-primary" onClick={this.searchLikes}>View matches</Button>
+          {this.state.success === "f" && <h1>No matches found :(</h1>}
           {this.state.success ==="t" && 
             <div>
               <br/>
                 {this.generateCards(this.state.likesData.length, this.state.likesData)}
-              <br/>
             </div>
           }
      
