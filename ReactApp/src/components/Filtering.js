@@ -35,7 +35,7 @@ class Filtering extends React.Component {
       .then(response => response.json())
       .then((data) => {
         console.log(data)
-        if (data.length !== 0) {
+        if (data[0].length !== 0) {
           this.setState({success:"t", likesData: data[0], userTopSkills: data[1]})
         } else {
           alert("No matches :( \nSelect preferences in the Edit Profile tab")
