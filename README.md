@@ -1,5 +1,8 @@
 # Video
-https://mediaspace.illinois.edu/media/t/1_pfvy4xu1?fbclid=IwAR0yeinhbC_Fp8TOllG0xITB0qQAWPriyJV3AeYfZwF2y1DV9jtDOT0K9DA
+https://youtu.be/h_oOLndWv7c
+
+# Description
+The goal of this project was to create an application for students to use to find other students who have similar interests as them. This is to aid them in finding partners for projects or startups or just study buddies for classes. The project accomplished creating a basic UI to match students of similar skill, major, and class standing to be study buddies. 
 
 # Building
 (Optional) virtualenv: https://cloud.google.com/python/docs/setup#installing_and_using_virtualenv
