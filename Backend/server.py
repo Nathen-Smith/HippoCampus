@@ -430,9 +430,12 @@ def updateUser():
     connection.reconnect()
 
     hashed_ID = _get_db_UserID(data['UserID'])
-    update_user = 'REPLACE INTO User (UserID, Age, ClassStanding, FirstName, LastName, Location, Major, Minor, Bio, Statement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+    # update_user = 'REPLACE INTO User (UserID, Age, ClassStanding, FirstName, LastName, Location, Major, Minor, Bio, Statement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+    # cursor = connection.cursor()
+    # cursor.execute(update_user, (hashed_ID, data['Age'], data['ClassStanding'], data['FirstName'], data["LastName"], data["Location"], data["Major"], data["Minor"], data["Bio"], data["Statement"]))
+    update_user = 'REPLACE INTO User (UserID, ClassStanding, FirstName, LastName, Location, Major, Minor, Bio, Statement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
     cursor = connection.cursor()
-    cursor.execute(update_user, (hashed_ID, data['Age'], data['ClassStanding'], data['FirstName'], data["LastName"], data["Location"], data["Major"], data["Minor"], data["Bio"], data["Statement"]))
+    cursor.execute(update_user, (hashed_ID, data['ClassStanding'], data['FirstName'], data["LastName"], data["Location"], data["Major"], data["Minor"], data["Bio"], data["Statement"]))
 
     connection.commit()
     connection.reconnect()

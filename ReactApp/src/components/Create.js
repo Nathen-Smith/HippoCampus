@@ -23,7 +23,7 @@ class Create extends React.Component {
     this.setState({Rating: e.target.value})
   }
 
-  insertLikes = () => {
+  insertSkill = () => {
     var data =  {
       "UserID": this.state.UserID,
       "Skill": this.state.Skill,
@@ -79,7 +79,7 @@ class Create extends React.Component {
                     <option value="2">2</option>
                     <option value="1">1</option>
                   </select>
-                  <Button variant="primary" onClick={this.insertLikes}>Insert Skill</Button>
+                  <Button variant="primary" onClick={this.insertSkill}>Insert Skill</Button>
                 </div>
               </div>
             </Col>

@@ -145,21 +145,26 @@ class Filtering extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {/*<h1>Filter</h1>*/}
-          <Button variant="outline-primary" onClick={this.searchLikes}>View matches</Button>
-          {this.state.success === "f" && <h1>No matches found :(</h1>}
-          {this.state.success ==="t" && 
-            <div>
-              <br/>
-                {this.generateCards(this.state.likesData.length, this.state.likesData)}
-            </div>
-          }
-     
-      </div>
-
-    )
+    if (this.state.success === "") {
+      return (
+        <div>
+            <Button variant="outline-primary" onClick={this.searchLikes}>View matches</Button>
+        </div>
+      )
+    } else if (this.state.success === "t") {
+      return (
+        <div>
+          <br/>
+          {this.generateCards(this.state.likesData.length, this.state.likesData)}
+        </div>
+      )
+    } else if (this.state.success === "f") {
+      return (
+        <div>
+          <h1>No matches found :(</h1>
+        </div>
+      )
+    }
   }
 }
 

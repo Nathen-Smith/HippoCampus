@@ -30,7 +30,7 @@ export default function Home() {
         <div className="Home">
           <div className="lander">
             <h1>HippoCampus</h1>
-            <p className="text-muted">Study Buddy Finder</p>
+            <p className="text-muted">Login to find study buddies!</p>
           </div>
         </div>
       );

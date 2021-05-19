@@ -212,7 +212,7 @@ class Autofill extends React.Component {
 		this.setState({Rating: e.target.value})
 	}
 
-	insertLikes = () => {
+	insertSkill = () => {
 		var data =  {
 			"UserID": this.state.UserID,
 			"Skill": this.state.value,
@@ -231,6 +231,7 @@ class Autofill extends React.Component {
 			.then(response => response.text())
 			.then((data) => {
 				console.log(data)
+				this.setState({value: ''})
 				if (sessionStorage.getItem('viewing_skills')) {
 					// if user is viewing skills, reload to update
 					this.searchLikes()
@@ -375,7 +376,7 @@ class Autofill extends React.Component {
 									<option value="1">1</option>
 									{/* <option value="None">None</option> */}
 								</select>
-								<Button variant="outline-primary" onClick={this.insertLikes}>Add</Button>
+								<Button variant="outline-primary" onClick={this.insertSkill}>Add</Button>
 							</div>
 						</div>
 					</Col>

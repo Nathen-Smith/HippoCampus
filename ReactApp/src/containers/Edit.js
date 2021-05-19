@@ -18,7 +18,7 @@ class Edit extends React.Component {
       //     [option]: false
       //   }),
       // ),
-      Age : sessionStorage.getItem('Age'),
+      Age : 20,
       ClassStanding : sessionStorage.getItem('ClassStanding'),
       Location : sessionStorage.getItem('Location'),
       Major : sessionStorage.getItem('Major'),
