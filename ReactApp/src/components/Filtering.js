@@ -11,6 +11,7 @@ class Filtering extends React.Component {
       userID: sessionStorage.getItem("UserID"),
       success: "",
       likesData: [],
+      userTopSkills: [],
       curr_idx: 0
     }
   }
@@ -31,68 +32,59 @@ class Filtering extends React.Component {
       method: "POST",
       body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then((data) => {
-      console.log(data.length)
-      if (data.length !== 0) {
-        this.setState({success:"t", likesData: data})
-      } else {
-        alert("No matches :( \nSelect preferences in the Edit Profile tab")
-        this.setState({success:"f"})
-
-      }
-    })
-    
-  }
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        if (data.length !== 0) {
+          this.setState({success:"t", likesData: data[0], userTopSkills: data[1]})
+        } else {
+          alert("No matches :( \nSelect preferences in the Edit Profile tab")
+          this.setState({success:"f"})
+        }
+      })
+    }
 
   generateCards (num_cards, data) {
-    console.log(num_cards)
+    console.log(data)
     var views = [], cards = []
     for (var i = 0; i < num_cards; i++) {
       if (data[i][0] != null && data[i][1] != null) {
         cards.push({index: i, text: data[i]})
+
+        // var skills =  {"UserID": data[i][5]}
+        // //find top three skills for UserID (data[i][5])
+        // fetch('http://127.0.0.1:5000/topSkillFinder', {
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   method: "POST",
+        //   body: JSON.stringify(skills)
+        // })
+        // .then(response => response.json())
+        // .then((top_skills_data) => {
+        //   top_skills.push(top_skills_data)
+        //   console.log(top_skills_data)
+        // })
       }
     }
+    
     cards.forEach(function(item) {
       views.push(
       <div key={item.index} style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-        {/* <br> */}
-        {/* <Button className={styles.thick}
-          variant="outline-danger"
-          size="sm"
-          onClick={this.removeSkill.bind(null, item.index)}>
-          Remove
-          
-        </Button>{" "} */}
-        {/* <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="https://www.pinclipart.com/picdir/middle/0-8587_cartoon-stack-of-books-free-image-clipart-stack.png"/>
-        <Card.Body>
-          <Card.Title>{this.state.likesData[item.index][0]+ ' '+ this.state.likesData[item.index][1]}</Card.Title>
-          <Card.Text>
-            {this.state.likesData[0][2]}
-            <br></br>
-            {this.state.likesData[0][3]}
-          </Card.Text>
-          <Button variant="danger">❤</Button>
-        </Card.Body>
-        </Card> */}
-
         <Card style={{width: "400px"}}>
         <Card.Header>{this.state.likesData[item.index][3]}</Card.Header>
         <Card.Body>
           <Card.Title>{this.state.likesData[item.index][0]+ ' '+ this.state.likesData[item.index][1]}</Card.Title>
           <Card.Text>
-          {this.state.likesData[0][2]}
+          {this.state.likesData[item.index][2]}
+          </Card.Text>
+          <Card.Text>
+            Skills: {this.state.userTopSkills[item.index].join(", ")}
           </Card.Text>
           <Button variant="danger" onClick={this.likedUser.bind(null, item.index)}>❤</Button>
           {/* <Button variant="danger">❤</Button> */}
         </Card.Body>
       </Card>     
-{/* 
-        <span className={styles.normal}>
-        {item.text}
-        </span> */}
-        {/* </br> */}
       </div>
 
       );

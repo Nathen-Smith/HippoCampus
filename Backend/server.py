@@ -252,8 +252,15 @@ def filter():
     # suggestions = []
     for result in cursor.stored_results():
         suggestions = (result.fetchall())
+    # print(suggestions)
 
-    return jsonify(suggestions)
+    top_skills = []
+    for user in suggestions:
+        get_skills = 'SELECT Skill From Skills Where UserID = ' + str(user[5]) + ' ORDER BY Rating DESC LIMIT 3;'
+        cursor.execute(get_skills)
+        top_skills.append((cursor.fetchall()))
+
+    return jsonify(suggestions, top_skills)
 
 @app.route("/getUserInfo", methods=['POST'])
 def getUserInfo():
@@ -491,6 +498,19 @@ def updatePrefs():
     cursor.execute(s)
     result = cursor.fetchall()
     connection.commit()
+    return jsonify(result)
+
+@app.route("/topSkillFinder", methods=['POST'])
+def topSkillFinder():
+    """ recieves post requests to add new task """
+    data = request.get_json()
+    # cursor = connection.cursor()
+    test = 'SELECT Skill From Skills Where UserID = ' + _get_db_UserID(data["UserID"]) + ' ORDER BY Rating DESC LIMIT 3;'
+    # cursor = connection.cursor()
+
+    cursor.execute(test)
+    # result = cursor.fetchall()
+    result = "hi"
     return jsonify(result)
 
 # @app.route("/")
