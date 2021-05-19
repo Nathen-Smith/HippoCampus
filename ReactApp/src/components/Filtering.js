@@ -50,7 +50,8 @@ class Filtering extends React.Component {
     for (var i = 0; i < num_cards; i++) {
       if (data[i][0] != null && data[i][1] != null) {
         cards.push({index: i, text: data[i]})
-
+        // DO NOT FETCH INSIDE FOR LOOP
+        // why? for loop can iterate quicker than the backend operation
         // var skills =  {"UserID": data[i][5]}
         // //find top three skills for UserID (data[i][5])
         // fetch('http://127.0.0.1:5000/topSkillFinder', {
