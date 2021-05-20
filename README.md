@@ -19,3 +19,7 @@ cd Backend
 pip3 install -r requirements.txt
 python3 server.py
 ```
+
+# Schema 
+![cs411_schema](https://user-images.githubusercontent.com/47373980/119061759-bfdd8500-b99a-11eb-99c3-8e5f5abf1e94.jpg)
+
