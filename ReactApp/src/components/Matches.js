@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import {Button} from 'react-bootstrap'
-// import Form from 'react-bootstrap/Form'
 import '../App.css'
 
 class Create extends React.Component {
@@ -16,7 +15,6 @@ class Create extends React.Component {
 
     removePerson = (i) => {
       if(window.confirm("Are you sure you want to delete this person?")) {
-        // console.log(this.state.matchesData)
       var data =  {
         "UserID": this.state.userID,
         "personUserID": this.state.matchesData[i][4],

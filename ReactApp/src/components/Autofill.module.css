@@ -1,0 +1,21 @@
+.normal {
+  color: black;
+  font-weight: normal;
+  font-family: Arial;
+}
+  
+.thick {
+  color: red;
+  font-weight: bold;
+}
+
+.rating {
+  border-radius: "0px"; 
+  border: "1px solid #aaa"; 
+  border-left: "0px"; 
+  border-top-left-radius: "0px";
+}
+
+.input {
+  border: "1px solid #aaa";
+}

@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest'
 import './Autofill.css'
 import './Rating.css'
 import {Button, Row, Col} from 'react-bootstrap'
-import styles from './SearchView.module.css';
+import styles from './Autofill.module.css';
 
 
 const languages = [	
@@ -155,7 +155,7 @@ function getSuggestions(value) {
 		return [];
 	}
 
-const regex = new RegExp('^' + escapedValue, 'i');
+  const regex = new RegExp('^' + escapedValue, 'i');
 	return languages.filter(language => regex.test(language.name));
 }
 
@@ -181,7 +181,6 @@ class Autofill extends React.Component {
 			value: '',
 			suggestions: [],
 			UserID: sessionStorage.getItem("UserID"),
-			// Skill: "",
 			Rating: "5",
 			success: "",
 			likesData: [],
@@ -191,21 +190,15 @@ class Autofill extends React.Component {
 	}
 
 	onChange = (event, { newValue, method }) => {
-		this.setState({
-			value: newValue
-		});
+		this.setState({value: newValue});
 	};
 	
 	onSuggestionsFetchRequested = ({ value }) => {
-		this.setState({
-			suggestions: getSuggestions(value)
-		});
+		this.setState({suggestions: getSuggestions(value)});
 	};
 
 	onSuggestionsClearRequested = () => {
-		this.setState({
-			suggestions: []
-		});
+		this.setState({suggestions: []});
 	};
 
 	changeRating = (e) => {
@@ -219,8 +212,6 @@ class Autofill extends React.Component {
 			"Rating": this.state.Rating
 		}
 		if (this.state.Skill !== null) {
-		
-
 			fetch('http://127.0.0.1:5000/create', {
 				headers: {
 					"Content-Type": "application/json"
@@ -355,26 +346,20 @@ class Autofill extends React.Component {
 								<span 
 									class="input-group-text" 
 									id="basic-addon3" 
-									style={{border: "1px solid #aaa"}}>
+									className={styles.input}>
 									Rating
 								</span>
 								<select
 									class="selectBox"
 									value={this.state.Rating} 
 									onChange={this.changeRating} 
-									style={{
-										borderRadius: "0px", 
-										border: "1px solid #aaa", 
-										borderLeft: "0px", 
-										borderRight: "0px"
-									}}
+									className={styles.rating}
 								>
 									<option value="5">5</option>
 									<option value="4">4</option>
 									<option value="3">3</option>
 									<option value="2">2</option>
 									<option value="1">1</option>
-									{/* <option value="None">None</option> */}
 								</select>
 								<Button variant="outline-primary" onClick={this.insertSkill}>Add</Button>
 							</div>

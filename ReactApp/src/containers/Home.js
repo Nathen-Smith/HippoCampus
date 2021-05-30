@@ -13,9 +13,6 @@ export default function Home() {
         <div className="lander">
           <h1>Welcome, {name}</h1>
           <img src="https://www.logocowboy.com/wp-content/uploads/2015/12/fatgeek3.png" width="250" height="200" alt="Mascot"></img>
-          {/* <LinkContainer to="/edit">
-            <Nav.Link >Edit Profile</Nav.Link>
-          </LinkContainer> */}
           <LinkContainer to="/find">
             <Nav.Link >Find Study Buddies</Nav.Link>
           </LinkContainer>

@@ -77,12 +77,6 @@ function Login() {
           })
 
         })
-        // sessionStorage.setItem('UserID', res.profileObj.googleId % 2147483647);
-        // sessionStorage.setItem('name', res.profileObj.name)
-
-        //we should use this item UserID to display if it is in session storage
-
-
 
   };
 
